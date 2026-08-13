@@ -1,0 +1,15 @@
+pmj/bdp/mr/lab2/SalesChannelAmount$ChannelAmountMapper.class
+pmj/bdp/mr/lab2/MonthlyWebStats$MonthlyReducer.class
+pmj/bdp/mr/lab2/SalesChannelCount$SumReducer.class
+pmj/bdp/mr/lab2/MonthlyWebStats.class
+pmj/bdp/mr/lab2/SalesChannelAmount.class
+pmj/bdp/mr/lab2/SalesChannelCount.class
+pmj/bdp/mr/lab2/YearlyOrders$YearReducer.class
+pmj/bdp/mr/lab2/Error404.class
+pmj/bdp/mr/lab2/MonthlyWebStats$MonthlyMapper.class
+pmj/bdp/mr/lab2/YearlyOrders$YearMapper.class
+pmj/bdp/mr/lab2/OrderRecord.class
+pmj/bdp/mr/lab2/YearlyOrders.class
+pmj/bdp/mr/lab2/SalesChannelAmount$ChannelAmountReducer.class
+pmj/bdp/mr/lab2/SalesChannelCount$ChannelMapper.class
+pmj/bdp/mr/lab2/Error404$Error404Mapper.class
