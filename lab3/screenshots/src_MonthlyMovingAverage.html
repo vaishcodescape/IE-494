@@ -1,0 +1,156 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MonthlyMovingAverage.java</title>
+<style>
+body{margin:0;background:#1e1e1e;color:#d4d4d4;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#252526;color:#cccccc;padding:8px 14px;font-size:12px;border-bottom:1px solid #333}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.k{color:#569cd6}.c{color:#6a9955}.s{color:#ce9178}.n{color:#b5cea8}
+</style>
+<div class="bar">MonthlyMovingAverage.java</div>
+<pre><span class="k">package</span> pmj.bdp.mr.lab3;
+
+<span class="k">import</span> java.io.IOException;
+<span class="k">import</span> java.util.Map;
+<span class="k">import</span> java.util.TreeMap;
+
+<span class="k">import</span> org.apache.hadoop.conf.Configuration;
+<span class="k">import</span> org.apache.hadoop.fs.Path;
+<span class="k">import</span> org.apache.hadoop.io.LongWritable;
+<span class="k">import</span> org.apache.hadoop.io.Text;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Job;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Mapper;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Reducer;
+<span class="k">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+<span class="k">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+<span class="c">/**
+ * Exercise 1 — Monthly moving average of website visitors
+ * (First-Time and Returning), following Parsian, Data Algorithms, Ch. 6
+ * Example 2 (URL / visit time series).
+ *
+ * Daily counts are summed into calendar months, then a simple moving
+ * average of window size W (default 3) is applied to the monthly series.
+ *
+ * Output: series \t YYYY-MM \t monthlyTotal \t movingAverage
+ */</span>
+<span class="k">public</span> <span class="k">class</span> MonthlyMovingAverage {
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">final</span> String WINDOW_CONF = <span class="s">&quot;moving.average.window.size&quot;</span>;
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> VisitMapper
+            <span class="k">extends</span> Mapper&lt;LongWritable, Text, Text, TimeSeriesData&gt; {
+
+        <span class="k">private</span> <span class="k">final</span> Text series = <span class="k">new</span> Text();
+        <span class="k">private</span> <span class="k">final</span> TimeSeriesData point = <span class="k">new</span> TimeSeriesData();
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> map(LongWritable key, Text value, Context context)
+                <span class="k">throws</span> IOException, InterruptedException {
+
+            VisitorRecord rec = VisitorRecord.parse(value.toString());
+            <span class="k">if</span> (rec == <span class="k">null</span>) {
+                <span class="k">return</span>;
+            }
+
+            <span class="k">long</span> ym = rec.yearMonth();
+
+            series.set(<span class="s">&quot;FirstTime&quot;</span>);
+            point.set(ym, rec.firstTimeVisits);
+            context.write(series, point);
+
+            series.set(<span class="s">&quot;Returning&quot;</span>);
+            point.set(ym, rec.returningVisits);
+            context.write(series, point);
+        }
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> MovingAverageReducer
+            <span class="k">extends</span> Reducer&lt;Text, TimeSeriesData, Text, Text&gt; {
+
+        <span class="k">private</span> <span class="k">int</span> windowSize = <span class="n">3</span>;
+        <span class="k">private</span> <span class="k">final</span> Text out = <span class="k">new</span> Text();
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> setup(Context context) {
+            windowSize = context.getConfiguration().getInt(WINDOW_CONF, <span class="n">3</span>);
+        }
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> reduce(Text key, Iterable&lt;TimeSeriesData&gt; values,
+                              Context context)
+                <span class="k">throws</span> IOException, InterruptedException {
+
+            <span class="c">// Sum daily points that fall in the same YYYYMM.</span>
+            <span class="c">// Copy each Writable — Hadoop reuses the same object.</span>
+            Map&lt;Long, Double&gt; monthly = <span class="k">new</span> TreeMap&lt;&gt;();
+            <span class="k">for</span> (TimeSeriesData ts : values) {
+                TimeSeriesData copy = TimeSeriesData.copy(ts);
+                monthly.merge(copy.getTimestamp(), copy.getValue(), Double::sum);
+            }
+
+            <span class="k">long</span>[] months = <span class="k">new</span> <span class="k">long</span>[monthly.size()];
+            <span class="k">double</span>[] totals = <span class="k">new</span> <span class="k">double</span>[monthly.size()];
+            <span class="k">int</span> n = <span class="n">0</span>;
+            <span class="k">for</span> (Map.Entry&lt;Long, Double&gt; e : monthly.entrySet()) {
+                months[n] = e.getKey();
+                totals[n] = e.getValue();
+                n++;
+            }
+
+            <span class="k">if</span> (n &lt; windowSize) {
+                <span class="k">return</span>;
+            }
+
+            <span class="k">double</span> sum = <span class="n">0.0</span>;
+            <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; windowSize - <span class="n">1</span>; i++) {
+                sum += totals[i];
+            }
+
+            <span class="k">for</span> (<span class="k">int</span> i = windowSize - <span class="n">1</span>; i &lt; n; i++) {
+                sum += totals[i];
+                <span class="k">double</span> sma = sum / windowSize;
+                out.set(formatYearMonth(months[i])
+                        + <span class="s">&quot;\t&quot;</span> + String.format(<span class="s">&quot;%.0f&quot;</span>, totals[i])
+                        + <span class="s">&quot;\t&quot;</span> + String.format(<span class="s">&quot;%.2f&quot;</span>, sma));
+                context.write(key, out);
+                sum -= totals[i - windowSize + <span class="n">1</span>];
+            }
+        }
+
+        <span class="k">static</span> String formatYearMonth(<span class="k">long</span> yyyymm) {
+            <span class="k">long</span> year = yyyymm / <span class="n">100</span>;
+            <span class="k">long</span> month = yyyymm % <span class="n">100</span>;
+            <span class="k">return</span> String.format(<span class="s">&quot;%04d-%02d&quot;</span>, year, month);
+        }
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> main(String[] args) <span class="k">throws</span> Exception {
+        <span class="k">if</span> (args.length != <span class="n">2</span>) {
+            System.err.println(<span class="s">&quot;Usage: MonthlyMovingAverage &lt;input&gt; &lt;output&gt;&quot;</span>);
+            System.exit(-<span class="n">1</span>);
+        }
+
+        Configuration conf = <span class="k">new</span> Configuration();
+        conf.set(<span class="s">&quot;fs.defaultFS&quot;</span>, <span class="s">&quot;file:///&quot;</span>);
+        conf.set(<span class="s">&quot;mapreduce.framework.name&quot;</span>, <span class="s">&quot;local&quot;</span>);
+        <span class="k">if</span> (conf.get(WINDOW_CONF) == <span class="k">null</span>) {
+            conf.setInt(WINDOW_CONF, <span class="n">3</span>);
+        }
+
+        Job job = Job.getInstance(conf, <span class="s">&quot;Monthly Moving Average of Website Visitors&quot;</span>);
+        job.setJarByClass(MonthlyMovingAverage.<span class="k">class</span>);
+        job.setMapperClass(VisitMapper.<span class="k">class</span>);
+        job.setReducerClass(MovingAverageReducer.<span class="k">class</span>);
+        job.setMapOutputKeyClass(Text.<span class="k">class</span>);
+        job.setMapOutputValueClass(TimeSeriesData.<span class="k">class</span>);
+        job.setOutputKeyClass(Text.<span class="k">class</span>);
+        job.setOutputValueClass(Text.<span class="k">class</span>);
+
+        FileInputFormat.addInputPath(job, <span class="k">new</span> Path(args[<span class="n">0</span>]));
+        FileOutputFormat.setOutputPath(job, <span class="k">new</span> Path(args[<span class="n">1</span>]));
+
+        System.exit(job.waitForCompletion(<span class="k">true</span>) ? <span class="n">0</span> : <span class="n">1</span>);
+    }
+}
+</pre>

@@ -18,7 +18,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * Output: &lt;SalesChannel, OrderCount, SumAmount&gt;
  */
 public class SalesChannelAmount {
-
     public static class ChannelAmountMapper
             extends Mapper<LongWritable, Text, Text, Text> {
 

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="959" height="528" viewBox="0 0 959 528">
+<rect width="959" height="528" rx="10" fill="#1c1c1e"/>
+<rect width="959" height="34" rx="10" fill="#323236"/>
+<rect y="16" width="959" height="18" fill="#323236"/>
+<circle cx="22" cy="17" r="6" fill="#ff5f56"/>
+<circle cx="42" cy="17" r="6" fill="#ffbd2e"/>
+<circle cx="62" cy="17" r="6" fill="#27c93f"/>
+<text x="479.5" y="22" text-anchor="middle" font-family="Menlo, Monaco, monospace" font-size="12" fill="#8e8e93">Terminal — Exercise 1 job + FirstTime sample</text>
+<text x="20" y="50" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> hadoop jar target/lab3.jar pmj.bdp.mr.lab3.MonthlyMovingAverage data/daily-website-visitors.csv output/q1_moving_average</tspan></text>
+<text x="20" y="68" font-family="Menlo, Monaco, monospace" font-size="13" fill="#8e8e93">2026-08-21 18:28:33 INFO mapreduce.Job: Running job: job_local1339732198_0001</text>
+<text x="20" y="86" font-family="Menlo, Monaco, monospace" font-size="13" fill="#8e8e93">2026-08-21 18:28:34 INFO mapreduce.Job:  map 100% reduce 100%</text>
+<text x="20" y="104" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">2026-08-21 18:28:34 INFO mapreduce.Job: Job job_local1339732198_0001 completed successfully</text>
+<text x="20" y="122" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff">Map input records=2168   Map output records=4334   Reduce output records=140</text>
+<text x="20" y="140" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8"></text>
+<text x="20" y="158" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> cat output/q1_moving_average/part-*</tspan></text>
+<text x="20" y="176" font-family="Menlo, Monaco, monospace" font-size="13" fill="#8e8e93"># series    YYYY-MM    monthlyTotal    movingAverage (window=3)</text>
+<text x="20" y="194" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2014-11    70591    60556.33</text>
+<text x="20" y="212" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2014-12    64677    70268.00</text>
+<text x="20" y="230" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-01    57010    64092.67</text>
+<text x="20" y="248" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-02    72442    64709.67</text>
+<text x="20" y="266" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-03    87639    72363.67</text>
+<text x="20" y="284" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-04    92197    84092.67</text>
+<text x="20" y="302" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-05    84697    88177.67</text>
+<text x="20" y="320" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-06    65018    80637.33</text>
+<text x="20" y="338" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-07    56209    68641.33</text>
+<text x="20" y="356" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-08    56300    59175.67</text>
+<text x="20" y="374" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-09    70410    60973.00</text>
+<text x="20" y="392" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-10    86311    71007.00</text>
+<text x="20" y="410" font-family="Menlo, Monaco, monospace" font-size="13" fill="#8e8e93">...</text>
+<text x="20" y="428" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-04    100478    88029.00</text>
+<text x="20" y="446" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-05    102424    94640.67</text>
+<text x="20" y="464" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-06    80704    94535.33</text>
+<text x="20" y="482" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-07    69157    84095.00</text>
+<text x="20" y="500" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-08    37435    62432.00</text>
+</svg>

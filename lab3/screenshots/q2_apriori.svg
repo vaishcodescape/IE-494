@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="875" height="1788" viewBox="0 0 875 1788">
+<rect width="875" height="1788" rx="10" fill="#1c1c1e"/>
+<rect width="875" height="34" rx="10" fill="#323236"/>
+<rect y="16" width="875" height="18" fill="#323236"/>
+<circle cx="22" cy="17" r="6" fill="#ff5f56"/>
+<circle cx="42" cy="17" r="6" fill="#ffbd2e"/>
+<circle cx="62" cy="17" r="6" fill="#27c93f"/>
+<text x="437.5" y="22" text-anchor="middle" font-family="Menlo, Monaco, monospace" font-size="12" fill="#8e8e93">Terminal — Exercise 2 MR-Apriori</text>
+<text x="20" y="50" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> hadoop jar target/lab3.jar pmj.bdp.mr.lab3.MRApriori data/retail.dat output/q2_apriori 1000</tspan></text>
+<text x="20" y="68" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">Job completed successfully   k=1 |L1|=56</text>
+<text x="20" y="86" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff">k=2 |L1|=56 |C2|=1540</text>
+<text x="20" y="104" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">Job completed successfully   k=2 |L2|=49</text>
+<text x="20" y="122" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">Job completed successfully   k=3 |L3|=24</text>
+<text x="20" y="140" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">Job completed successfully   k=4 |L4|=6</text>
+<text x="20" y="158" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff">k=5 |L4|=6 |C5|=0</text>
+<text x="20" y="176" font-family="Menlo, Monaco, monospace" font-size="13" fill="#30d158">Frequent itemsets (k&gt;=2) written to output/q2_apriori/frequent-itemsets.txt</text>
+<text x="20" y="194" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8"></text>
+<text x="20" y="212" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> cat output/q2_apriori/frequent-itemsets.txt</tspan></text>
+<text x="20" y="230" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff"># Frequent itemsets (size &gt;= 2), minSupport=1000</text>
+<text x="20" y="248" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff"># size 2</text>
+<text x="20" y="266" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,38    2833</text>
+<text x="20" y="284" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,39    8455</text>
+<text x="20" y="302" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,41    3196</text>
+<text x="20" y="320" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,48    8034</text>
+<text x="20" y="338" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,38    2790</text>
+<text x="20" y="356" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,39    2037</text>
+<text x="20" y="374" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,48    1416</text>
+<text x="20" y="392" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">37,38    1046</text>
+<text x="20" y="410" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,110    2725</text>
+<text x="20" y="428" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,170    3031</text>
+<text x="20" y="446" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,286    1116</text>
+<text x="20" y="464" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39    10345</text>
+<text x="20" y="482" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,41    3897</text>
+<text x="20" y="500" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,48    7944</text>
+<text x="20" y="518" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,101    1400</text>
+<text x="20" y="536" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,110    1759</text>
+<text x="20" y="554" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,1327    1156</text>
+<text x="20" y="572" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,147    1137</text>
+<text x="20" y="590" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,170    2059</text>
+<text x="20" y="608" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,2238    1287</text>
+<text x="20" y="626" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,225    2351</text>
+<text x="20" y="644" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,237    1929</text>
+<text x="20" y="662" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,255    1057</text>
+<text x="20" y="680" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,270    1194</text>
+<text x="20" y="698" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,271    1434</text>
+<text x="20" y="716" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,310    1852</text>
+<text x="20" y="734" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,41    11414</text>
+<text x="20" y="752" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,413    1130</text>
+<text x="20" y="770" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,438    1260</text>
+<text x="20" y="788" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,475    1500</text>
+<text x="20" y="806" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48    29142</text>
+<text x="20" y="824" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,65    2787</text>
+<text x="20" y="842" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,79    1111</text>
+<text x="20" y="860" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,89    2749</text>
+<text x="20" y="878" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">41,48    9018</text>
+<text x="20" y="896" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,101    1311</text>
+<text x="20" y="914" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,110    1380</text>
+<text x="20" y="932" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,147    1036</text>
+<text x="20" y="950" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,170    1557</text>
+<text x="20" y="968" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,225    1736</text>
+<text x="20" y="986" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,237    1682</text>
+<text x="20" y="1004" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,255    1057</text>
+<text x="20" y="1022" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,271    1090</text>
+<text x="20" y="1040" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,310    1692</text>
+<text x="20" y="1058" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,413    1135</text>
+<text x="20" y="1076" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,438    1025</text>
+<text x="20" y="1094" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,475    1428</text>
+<text x="20" y="1112" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,65    2529</text>
+<text x="20" y="1130" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">48,89    2798</text>
+<text x="20" y="1148" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8"></text>
+<text x="20" y="1166" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff"># size 3</text>
+<text x="20" y="1184" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,38,39    1840</text>
+<text x="20" y="1202" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,38,48    1646</text>
+<text x="20" y="1220" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,39,41    2359</text>
+<text x="20" y="1238" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,39,48    5402</text>
+<text x="20" y="1256" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,41,48    2063</text>
+<text x="20" y="1274" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,38,39    1945</text>
+<text x="20" y="1292" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,38,48    1360</text>
+<text x="20" y="1310" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,39,48    1116</text>
+<text x="20" y="1328" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,110    1740</text>
+<text x="20" y="1346" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,170    2019</text>
+<text x="20" y="1364" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,41    3051</text>
+<text x="20" y="1382" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,48    6102</text>
+<text x="20" y="1400" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,41,48    2374</text>
+<text x="20" y="1418" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,48,110    1361</text>
+<text x="20" y="1436" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,48,170    1538</text>
+<text x="20" y="1454" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,41,48    7366</text>
+<text x="20" y="1472" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,110    1037</text>
+<text x="20" y="1490" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,170    1206</text>
+<text x="20" y="1508" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,225    1400</text>
+<text x="20" y="1526" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,237    1244</text>
+<text x="20" y="1544" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,310    1347</text>
+<text x="20" y="1562" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,475    1092</text>
+<text x="20" y="1580" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,65    1797</text>
+<text x="20" y="1598" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">39,48,89    2125</text>
+<text x="20" y="1616" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8"></text>
+<text x="20" y="1634" font-family="Menlo, Monaco, monospace" font-size="13" fill="#64d2ff"># size 4</text>
+<text x="20" y="1652" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,38,39,48    1236</text>
+<text x="20" y="1670" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">32,39,41,48    1646</text>
+<text x="20" y="1688" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">36,38,39,48    1080</text>
+<text x="20" y="1706" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,41,48    1991</text>
+<text x="20" y="1724" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,48,110    1031</text>
+<text x="20" y="1742" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">38,39,48,170    1193</text>
+<text x="20" y="1760" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8"></text>
+</svg>

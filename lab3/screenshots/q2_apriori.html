@@ -1,0 +1,114 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Terminal — Exercise 2 MR-Apriori</title>
+<style>
+body{margin:0;background:#1c1c1e;color:#e6e6e8;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#323236;padding:8px 14px;color:#8e8e93;display:flex;align-items:center;gap:8px;font-size:12px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.t{flex:1;text-align:center}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.p{color:#66bb6a}.cmd{color:#fff}.ok{color:#30d158}.dim{color:#8e8e93}.info{color:#64d2ff}
+</style>
+<div class="bar">
+<span class="dot" style="background:#ff5f56"></span>
+<span class="dot" style="background:#ffbd2e"></span>
+<span class="dot" style="background:#27c93f"></span>
+<span class="t">Terminal — Exercise 2 MR-Apriori</span>
+</div>
+<pre><span class="p">~/IE-494/lab3 %</span> <span class="cmd">hadoop jar target/lab3.jar pmj.bdp.mr.lab3.MRApriori data/retail.dat output/q2_apriori 1000</span>
+<span class="ok">Job completed successfully   k=1 |L1|=56</span>
+<span class="info">k=2 |L1|=56 |C2|=1540</span>
+<span class="ok">Job completed successfully   k=2 |L2|=49</span>
+<span class="ok">Job completed successfully   k=3 |L3|=24</span>
+<span class="ok">Job completed successfully   k=4 |L4|=6</span>
+<span class="info">k=5 |L4|=6 |C5|=0</span>
+<span class="ok">Frequent itemsets (k&gt;=2) written to output/q2_apriori/frequent-itemsets.txt</span>
+
+<span class="p">~/IE-494/lab3 %</span> <span class="cmd">cat output/q2_apriori/frequent-itemsets.txt</span>
+# Frequent itemsets (size &gt;= 2), minSupport=1000
+# size 2
+32,38    2833
+32,39    8455
+32,41    3196
+32,48    8034
+36,38    2790
+36,39    2037
+36,48    1416
+37,38    1046
+38,110    2725
+38,170    3031
+38,286    1116
+38,39    10345
+38,41    3897
+38,48    7944
+39,101    1400
+39,110    1759
+39,1327    1156
+39,147    1137
+39,170    2059
+39,2238    1287
+39,225    2351
+39,237    1929
+39,255    1057
+39,270    1194
+39,271    1434
+39,310    1852
+39,41    11414
+39,413    1130
+39,438    1260
+39,475    1500
+39,48    29142
+39,65    2787
+39,79    1111
+39,89    2749
+41,48    9018
+48,101    1311
+48,110    1380
+48,147    1036
+48,170    1557
+48,225    1736
+48,237    1682
+48,255    1057
+48,271    1090
+48,310    1692
+48,413    1135
+48,438    1025
+48,475    1428
+48,65    2529
+48,89    2798
+
+# size 3
+32,38,39    1840
+32,38,48    1646
+32,39,41    2359
+32,39,48    5402
+32,41,48    2063
+36,38,39    1945
+36,38,48    1360
+36,39,48    1116
+38,39,110    1740
+38,39,170    2019
+38,39,41    3051
+38,39,48    6102
+38,41,48    2374
+38,48,110    1361
+38,48,170    1538
+39,41,48    7366
+39,48,110    1037
+39,48,170    1206
+39,48,225    1400
+39,48,237    1244
+39,48,310    1347
+39,48,475    1092
+39,48,65    1797
+39,48,89    2125
+
+# size 4
+32,38,39,48    1236
+32,39,41,48    1646
+36,38,39,48    1080
+38,39,41,48    1991
+38,39,48,110    1031
+38,39,48,170    1193
+
+</pre>

@@ -1,0 +1,74 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>TimeSeriesData.java</title>
+<style>
+body{margin:0;background:#1e1e1e;color:#d4d4d4;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#252526;color:#cccccc;padding:8px 14px;font-size:12px;border-bottom:1px solid #333}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.k{color:#569cd6}.c{color:#6a9955}.s{color:#ce9178}.n{color:#b5cea8}
+</style>
+<div class="bar">TimeSeriesData.java</div>
+<pre><span class="k">package</span> pmj.bdp.mr.lab3;
+
+<span class="k">import</span> java.io.DataInput;
+<span class="k">import</span> java.io.DataOutput;
+<span class="k">import</span> java.io.IOException;
+
+<span class="k">import</span> org.apache.hadoop.io.Writable;
+
+<span class="c">/**
+ * (timestamp, value) pair for a time series point.
+ * From Parsian, Data Algorithms, Chapter 6.
+ */</span>
+<span class="k">public</span> <span class="k">class</span> TimeSeriesData <span class="k">implements</span> Writable, Comparable&lt;TimeSeriesData&gt; {
+
+    <span class="k">private</span> <span class="k">long</span> timestamp;
+    <span class="k">private</span> <span class="k">double</span> value;
+
+    <span class="k">public</span> TimeSeriesData() {
+    }
+
+    <span class="k">public</span> TimeSeriesData(<span class="k">long</span> timestamp, <span class="k">double</span> value) {
+        set(timestamp, value);
+    }
+
+    <span class="k">public</span> <span class="k">void</span> set(<span class="k">long</span> timestamp, <span class="k">double</span> value) {
+        <span class="k">this</span>.timestamp = timestamp;
+        <span class="k">this</span>.value = value;
+    }
+
+    <span class="k">public</span> <span class="k">static</span> TimeSeriesData copy(TimeSeriesData other) {
+        <span class="k">return</span> <span class="k">new</span> TimeSeriesData(other.timestamp, other.value);
+    }
+
+    <span class="k">public</span> <span class="k">long</span> getTimestamp() {
+        <span class="k">return</span> timestamp;
+    }
+
+    <span class="k">public</span> <span class="k">double</span> getValue() {
+        <span class="k">return</span> value;
+    }
+
+    @Override
+    <span class="k">public</span> <span class="k">void</span> write(DataOutput out) <span class="k">throws</span> IOException {
+        out.writeLong(timestamp);
+        out.writeDouble(value);
+    }
+
+    @Override
+    <span class="k">public</span> <span class="k">void</span> readFields(DataInput in) <span class="k">throws</span> IOException {
+        timestamp = in.readLong();
+        value = in.readDouble();
+    }
+
+    @Override
+    <span class="k">public</span> <span class="k">int</span> compareTo(TimeSeriesData other) {
+        <span class="k">return</span> Long.compare(<span class="k">this</span>.timestamp, other.timestamp);
+    }
+
+    @Override
+    <span class="k">public</span> String toString() {
+        <span class="k">return</span> <span class="s">&quot;(&quot;</span> + timestamp + <span class="s">&quot;,&quot;</span> + value + <span class="s">&quot;)&quot;</span>;
+    }
+}
+</pre>

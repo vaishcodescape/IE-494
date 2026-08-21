@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1338" viewBox="0 0 640 1338">
+<rect width="640" height="1338" rx="10" fill="#1c1c1e"/>
+<rect width="640" height="34" rx="10" fill="#323236"/>
+<rect y="16" width="640" height="18" fill="#323236"/>
+<circle cx="22" cy="17" r="6" fill="#ff5f56"/>
+<circle cx="42" cy="17" r="6" fill="#ffbd2e"/>
+<circle cx="62" cy="17" r="6" fill="#27c93f"/>
+<text x="320.0" y="22" text-anchor="middle" font-family="Menlo, Monaco, monospace" font-size="12" fill="#8e8e93">Terminal — Exercise 1 Returning full output</text>
+<text x="20" y="50" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> cat output/q1_moving_average/part-* | grep Returning</tspan></text>
+<text x="20" y="68" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2014-11    10922    8319.00</text>
+<text x="20" y="86" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2014-12    11328    10761.00</text>
+<text x="20" y="104" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-01    9853    10701.00</text>
+<text x="20" y="122" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-02    12162    11114.33</text>
+<text x="20" y="140" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-03    15619    12544.67</text>
+<text x="20" y="158" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-04    17345    15042.00</text>
+<text x="20" y="176" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-05    16462    16475.33</text>
+<text x="20" y="194" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-06    14397    16068.00</text>
+<text x="20" y="212" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-07    13001    14620.00</text>
+<text x="20" y="230" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-08    12952    13450.00</text>
+<text x="20" y="248" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-09    12730    12894.33</text>
+<text x="20" y="266" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-10    15718    13800.00</text>
+<text x="20" y="284" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-11    17064    15170.67</text>
+<text x="20" y="302" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2015-12    15359    16047.00</text>
+<text x="20" y="320" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-01    13833    15418.67</text>
+<text x="20" y="338" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-02    16386    15192.67</text>
+<text x="20" y="356" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-03    19090    16436.33</text>
+<text x="20" y="374" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-04    21208    18894.67</text>
+<text x="20" y="392" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-05    20395    20231.00</text>
+<text x="20" y="410" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-06    17821    19808.00</text>
+<text x="20" y="428" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-07    15517    17911.00</text>
+<text x="20" y="446" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-08    16370    16569.33</text>
+<text x="20" y="464" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-09    16373    16086.67</text>
+<text x="20" y="482" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-10    20916    17886.33</text>
+<text x="20" y="500" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-11    22426    19905.00</text>
+<text x="20" y="518" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2016-12    19487    20943.00</text>
+<text x="20" y="536" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-01    16929    19614.00</text>
+<text x="20" y="554" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-02    17550    17988.67</text>
+<text x="20" y="572" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-03    18460    17646.33</text>
+<text x="20" y="590" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-04    17960    17990.00</text>
+<text x="20" y="608" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-05    17708    18042.67</text>
+<text x="20" y="626" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-06    13876    16514.67</text>
+<text x="20" y="644" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-07    11735    14439.67</text>
+<text x="20" y="662" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-08    11392    12334.33</text>
+<text x="20" y="680" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-09    11128    11418.33</text>
+<text x="20" y="698" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-10    13725    12081.67</text>
+<text x="20" y="716" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-11    16069    13640.67</text>
+<text x="20" y="734" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2017-12    14301    14698.33</text>
+<text x="20" y="752" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-01    14204    14858.00</text>
+<text x="20" y="770" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-02    14642    14382.33</text>
+<text x="20" y="788" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-03    18186    15677.33</text>
+<text x="20" y="806" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-04    20897    17908.33</text>
+<text x="20" y="824" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-05    20682    19921.67</text>
+<text x="20" y="842" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-06    15335    18971.33</text>
+<text x="20" y="860" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-07    14485    16834.00</text>
+<text x="20" y="878" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-08    15217    15012.33</text>
+<text x="20" y="896" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-09    14349    14683.67</text>
+<text x="20" y="914" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-10    19173    16246.33</text>
+<text x="20" y="932" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-11    19960    17827.33</text>
+<text x="20" y="950" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2018-12    17615    18916.00</text>
+<text x="20" y="968" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-01    15614    17729.67</text>
+<text x="20" y="986" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-02    16719    16649.33</text>
+<text x="20" y="1004" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-03    19083    17138.67</text>
+<text x="20" y="1022" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-04    20351    18717.67</text>
+<text x="20" y="1040" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-05    17929    19121.00</text>
+<text x="20" y="1058" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-06    12998    17092.67</text>
+<text x="20" y="1076" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-07    13231    14719.33</text>
+<text x="20" y="1094" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-08    11885    12704.67</text>
+<text x="20" y="1112" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-09    12589    12568.33</text>
+<text x="20" y="1130" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-10    15148    13207.33</text>
+<text x="20" y="1148" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-11    16108    14615.00</text>
+<text x="20" y="1166" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2019-12    13101    14785.67</text>
+<text x="20" y="1184" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-01    11975    13728.00</text>
+<text x="20" y="1202" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-02    13307    12794.33</text>
+<text x="20" y="1220" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-03    13799    13027.00</text>
+<text x="20" y="1238" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-04    17002    14702.67</text>
+<text x="20" y="1256" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-05    18593    16464.67</text>
+<text x="20" y="1274" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-06    15012    16869.00</text>
+<text x="20" y="1292" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-07    12932    15512.33</text>
+<text x="20" y="1310" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">Returning    2020-08    7396    11780.00</text>
+</svg>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1338" viewBox="0 0 640 1338">
+<rect width="640" height="1338" rx="10" fill="#1c1c1e"/>
+<rect width="640" height="34" rx="10" fill="#323236"/>
+<rect y="16" width="640" height="18" fill="#323236"/>
+<circle cx="22" cy="17" r="6" fill="#ff5f56"/>
+<circle cx="42" cy="17" r="6" fill="#ffbd2e"/>
+<circle cx="62" cy="17" r="6" fill="#27c93f"/>
+<text x="320.0" y="22" text-anchor="middle" font-family="Menlo, Monaco, monospace" font-size="12" fill="#8e8e93">Terminal — Exercise 1 FirstTime full output</text>
+<text x="20" y="50" font-family="Menlo, Monaco, monospace" font-size="13"><tspan fill="#66bb6a">~/IE-494/lab3 %</tspan><tspan fill="#ffffff"> cat output/q1_moving_average/part-* | grep FirstTime</tspan></text>
+<text x="20" y="68" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2014-11    70591    60556.33</text>
+<text x="20" y="86" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2014-12    64677    70268.00</text>
+<text x="20" y="104" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-01    57010    64092.67</text>
+<text x="20" y="122" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-02    72442    64709.67</text>
+<text x="20" y="140" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-03    87639    72363.67</text>
+<text x="20" y="158" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-04    92197    84092.67</text>
+<text x="20" y="176" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-05    84697    88177.67</text>
+<text x="20" y="194" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-06    65018    80637.33</text>
+<text x="20" y="212" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-07    56209    68641.33</text>
+<text x="20" y="230" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-08    56300    59175.67</text>
+<text x="20" y="248" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-09    70410    60973.00</text>
+<text x="20" y="266" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-10    86311    71007.00</text>
+<text x="20" y="284" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-11    87169    81296.67</text>
+<text x="20" y="302" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2015-12    73494    82324.67</text>
+<text x="20" y="320" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-01    63586    74749.67</text>
+<text x="20" y="338" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-02    79409    72163.00</text>
+<text x="20" y="356" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-03    86812    76602.33</text>
+<text x="20" y="374" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-04    94250    86823.67</text>
+<text x="20" y="392" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-05    88922    89994.67</text>
+<text x="20" y="410" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-06    71360    84844.00</text>
+<text x="20" y="428" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-07    58122    72801.33</text>
+<text x="20" y="446" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-08    65078    64853.33</text>
+<text x="20" y="464" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-09    76525    66575.00</text>
+<text x="20" y="482" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-10    96064    79222.33</text>
+<text x="20" y="500" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-11    94081    88890.00</text>
+<text x="20" y="518" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2016-12    77269    89138.00</text>
+<text x="20" y="536" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-01    67699    79683.00</text>
+<text x="20" y="554" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-02    72889    72619.00</text>
+<text x="20" y="572" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-03    73112    71233.33</text>
+<text x="20" y="590" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-04    71746    72582.33</text>
+<text x="20" y="608" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-05    69371    71409.67</text>
+<text x="20" y="626" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-06    49417    63511.33</text>
+<text x="20" y="644" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-07    39261    52683.00</text>
+<text x="20" y="662" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-08    40005    42894.33</text>
+<text x="20" y="680" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-09    49859    43041.67</text>
+<text x="20" y="698" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-10    61957    50607.00</text>
+<text x="20" y="716" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-11    65802    59206.00</text>
+<text x="20" y="734" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2017-12    56677    61478.67</text>
+<text x="20" y="752" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-01    59968    60815.67</text>
+<text x="20" y="770" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-02    67619    61421.33</text>
+<text x="20" y="788" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-03    84754    70780.33</text>
+<text x="20" y="806" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-04    98041    83471.33</text>
+<text x="20" y="824" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-05    90022    90939.00</text>
+<text x="20" y="842" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-06    61012    83025.00</text>
+<text x="20" y="860" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-07    52754    67929.33</text>
+<text x="20" y="878" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-08    58218    57328.00</text>
+<text x="20" y="896" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-09    65390    58787.33</text>
+<text x="20" y="914" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-10    98884    74164.00</text>
+<text x="20" y="932" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-11    95213    86495.67</text>
+<text x="20" y="950" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2018-12    78504    90867.00</text>
+<text x="20" y="968" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-01    73135    82284.00</text>
+<text x="20" y="986" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-02    79469    77036.00</text>
+<text x="20" y="1004" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-03    88900    80501.33</text>
+<text x="20" y="1022" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-04    96852    88407.00</text>
+<text x="20" y="1040" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-05    79799    88517.00</text>
+<text x="20" y="1058" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-06    57371    78007.33</text>
+<text x="20" y="1076" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-07    58692    65287.33</text>
+<text x="20" y="1094" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-08    57571    57878.00</text>
+<text x="20" y="1112" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-09    75671    63978.00</text>
+<text x="20" y="1130" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-10    92577    75273.00</text>
+<text x="20" y="1148" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-11    93341    87196.33</text>
+<text x="20" y="1166" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2019-12    77245    87721.00</text>
+<text x="20" y="1184" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-01    70439    80341.67</text>
+<text x="20" y="1202" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-02    82589    76757.67</text>
+<text x="20" y="1220" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-03    81020    78016.00</text>
+<text x="20" y="1238" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-04    100478    88029.00</text>
+<text x="20" y="1256" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-05    102424    94640.67</text>
+<text x="20" y="1274" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-06    80704    94535.33</text>
+<text x="20" y="1292" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-07    69157    84095.00</text>
+<text x="20" y="1310" font-family="Menlo, Monaco, monospace" font-size="13" fill="#e6e6e8">FirstTime    2020-08    37435    62432.00</text>
+</svg>

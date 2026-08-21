@@ -1,0 +1,305 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MRApriori.java</title>
+<style>
+body{margin:0;background:#1e1e1e;color:#d4d4d4;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#252526;color:#cccccc;padding:8px 14px;font-size:12px;border-bottom:1px solid #333}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.k{color:#569cd6}.c{color:#6a9955}.s{color:#ce9178}.n{color:#b5cea8}
+</style>
+<div class="bar">MRApriori.java</div>
+<pre><span class="k">package</span> pmj.bdp.mr.lab3;
+
+<span class="k">import</span> java.io.BufferedReader;
+<span class="k">import</span> java.io.BufferedWriter;
+<span class="k">import</span> java.io.File;
+<span class="k">import</span> java.io.FileReader;
+<span class="k">import</span> java.io.FileWriter;
+<span class="k">import</span> java.io.IOException;
+<span class="k">import</span> java.nio.file.Files;
+<span class="k">import</span> java.util.ArrayList;
+<span class="k">import</span> java.util.HashSet;
+<span class="k">import</span> java.util.List;
+<span class="k">import</span> java.util.Set;
+
+<span class="k">import</span> org.apache.hadoop.conf.Configuration;
+<span class="k">import</span> org.apache.hadoop.fs.Path;
+<span class="k">import</span> org.apache.hadoop.io.IntWritable;
+<span class="k">import</span> org.apache.hadoop.io.LongWritable;
+<span class="k">import</span> org.apache.hadoop.io.Text;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Job;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Mapper;
+<span class="k">import</span> org.apache.hadoop.mapreduce.Reducer;
+<span class="k">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+<span class="k">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+<span class="c">/**
+ * Exercise 2 — MR-Apriori frequent-itemset mining
+ * (Lin, &quot;MR-Apriori: Association Rules Algorithm Based on MapReduce&quot;, 2014).
+ *
+ * One MapReduce job per itemset size k:
+ *   k = 1  count items; keep those with support &amp;gt;= minsup
+ *   k &amp;gt;= 2  Apriori-gen C_k from L_{k-1}, count candidates, keep frequent
+ *
+ * Singleton itemsets are computed but not written to the final listing.
+ *
+ * Usage: MRApriori &amp;lt;transactions&amp;gt; &amp;lt;outputDir&amp;gt; &amp;lt;minSupport&amp;gt;
+ */</span>
+<span class="k">public</span> <span class="k">class</span> MRApriori {
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">final</span> String CANDIDATES_PATH = <span class="s">&quot;apriori.candidates.path&quot;</span>;
+    <span class="k">public</span> <span class="k">static</span> <span class="k">final</span> String MIN_SUPPORT = <span class="s">&quot;apriori.minsupport&quot;</span>;
+    <span class="k">public</span> <span class="k">static</span> <span class="k">final</span> String ITEMSET_K = <span class="s">&quot;apriori.k&quot;</span>;
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> CandidateCountMapper
+            <span class="k">extends</span> Mapper&lt;LongWritable, Text, Text, IntWritable&gt; {
+
+        <span class="k">private</span> <span class="k">static</span> <span class="k">final</span> IntWritable ONE = <span class="k">new</span> IntWritable(<span class="n">1</span>);
+        <span class="k">private</span> <span class="k">final</span> Text outKey = <span class="k">new</span> Text();
+        <span class="k">private</span> <span class="k">int</span> k;
+        <span class="k">private</span> List&lt;<span class="k">int</span>[]&gt; candidates = <span class="k">new</span> ArrayList&lt;&gt;();
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> setup(Context context) <span class="k">throws</span> IOException {
+            Configuration conf = context.getConfiguration();
+            k = conf.getInt(ITEMSET_K, <span class="n">1</span>);
+            <span class="k">if</span> (k &gt;= <span class="n">2</span>) {
+                String path = conf.get(CANDIDATES_PATH);
+                candidates = readItemsets(path);
+            }
+        }
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> map(LongWritable key, Text value, Context context)
+                <span class="k">throws</span> IOException, InterruptedException {
+
+            String line = value.toString().trim();
+            <span class="k">if</span> (line.isEmpty()) {
+                <span class="k">return</span>;
+            }
+
+            Set&lt;Integer&gt; txn = parseTransaction(line);
+            <span class="k">if</span> (txn.isEmpty()) {
+                <span class="k">return</span>;
+            }
+
+            <span class="k">if</span> (k == <span class="n">1</span>) {
+                <span class="k">for</span> (<span class="k">int</span> item : txn) {
+                    outKey.set(Integer.toString(item));
+                    context.write(outKey, ONE);
+                }
+                <span class="k">return</span>;
+            }
+
+            <span class="k">for</span> (<span class="k">int</span>[] cand : candidates) {
+                <span class="k">if</span> (Itemset.containsAll(txn, cand)) {
+                    outKey.set(Itemset.toKey(cand));
+                    context.write(outKey, ONE);
+                }
+            }
+        }
+
+        <span class="k">static</span> Set&lt;Integer&gt; parseTransaction(String line) {
+            Set&lt;Integer&gt; items = <span class="k">new</span> HashSet&lt;&gt;();
+            <span class="k">for</span> (String tok : line.split(<span class="s">&quot;\\s+&quot;</span>)) {
+                <span class="k">if</span> (tok.isEmpty()) {
+                    <span class="k">continue</span>;
+                }
+                items.add(Integer.parseInt(tok));
+            }
+            <span class="k">return</span> items;
+        }
+    }
+
+    <span class="c">/** Local sum — same types as the reducer, no minsup filter. */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> SumCombiner
+            <span class="k">extends</span> Reducer&lt;Text, IntWritable, Text, IntWritable&gt; {
+
+        <span class="k">private</span> <span class="k">final</span> IntWritable out = <span class="k">new</span> IntWritable();
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context)
+                <span class="k">throws</span> IOException, InterruptedException {
+            <span class="k">int</span> sum = <span class="n">0</span>;
+            <span class="k">for</span> (IntWritable v : values) {
+                sum += v.get();
+            }
+            out.set(sum);
+            context.write(key, out);
+        }
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> SupportReducer
+            <span class="k">extends</span> Reducer&lt;Text, IntWritable, Text, IntWritable&gt; {
+
+        <span class="k">private</span> <span class="k">int</span> minSupport;
+        <span class="k">private</span> <span class="k">final</span> IntWritable out = <span class="k">new</span> IntWritable();
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> setup(Context context) {
+            minSupport = context.getConfiguration().getInt(MIN_SUPPORT, <span class="n">1</span>);
+        }
+
+        @Override
+        <span class="k">protected</span> <span class="k">void</span> reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context)
+                <span class="k">throws</span> IOException, InterruptedException {
+            <span class="k">int</span> sum = <span class="n">0</span>;
+            <span class="k">for</span> (IntWritable v : values) {
+                sum += v.get();
+            }
+            <span class="k">if</span> (sum &gt;= minSupport) {
+                out.set(sum);
+                context.write(key, out);
+            }
+        }
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> main(String[] args) <span class="k">throws</span> Exception {
+        <span class="k">if</span> (args.length != <span class="n">3</span>) {
+            System.err.println(<span class="s">&quot;Usage: MRApriori &lt;transactions&gt; &lt;outputDir&gt; &lt;minSupport&gt;&quot;</span>);
+            System.exit(-<span class="n">1</span>);
+        }
+
+        Path transactions = <span class="k">new</span> Path(args[<span class="n">0</span>]);
+        File outRoot = <span class="k">new</span> File(args[<span class="n">1</span>]);
+        <span class="k">int</span> minSupport = Integer.parseInt(args[<span class="n">2</span>]);
+
+        <span class="k">if</span> (outRoot.exists()) {
+            System.err.println(<span class="s">&quot;Output directory already exists: &quot;</span> + outRoot);
+            System.exit(-<span class="n">1</span>);
+        }
+        <span class="k">if</span> (!outRoot.mkdirs()) {
+            System.err.println(<span class="s">&quot;Could not create &quot;</span> + outRoot);
+            System.exit(-<span class="n">1</span>);
+        }
+
+        File work = <span class="k">new</span> File(outRoot, <span class="s">&quot;_work&quot;</span>);
+        work.mkdirs();
+
+        List&lt;<span class="k">int</span>[]&gt; previous = <span class="k">new</span> ArrayList&lt;&gt;();
+        File combined = <span class="k">new</span> File(outRoot, <span class="s">&quot;frequent-itemsets.txt&quot;</span>);
+
+        <span class="k">try</span> (BufferedWriter listing = <span class="k">new</span> BufferedWriter(<span class="k">new</span> FileWriter(combined))) {
+            listing.write(<span class="s">&quot;# Frequent itemsets (size &gt;= 2), minSupport=&quot;</span> + minSupport);
+            listing.newLine();
+
+            <span class="k">for</span> (<span class="k">int</span> k = <span class="n">1</span>; ; k++) {
+                File candidatesFile = <span class="k">new</span> File(work, <span class="s">&quot;C&quot;</span> + k + <span class="s">&quot;.txt&quot;</span>);
+                <span class="k">if</span> (k &gt;= <span class="n">2</span>) {
+                    List&lt;<span class="k">int</span>[]&gt; ck = Itemset.generateCandidates(previous);
+                    System.out.println(<span class="s">&quot;k=&quot;</span> + k + <span class="s">&quot; |L&quot;</span> + (k - <span class="n">1</span>) + <span class="s">&quot;|=&quot;</span> + previous.size()
+                            + <span class="s">&quot; |C&quot;</span> + k + <span class="s">&quot;|=&quot;</span> + ck.size());
+                    <span class="k">if</span> (ck.isEmpty()) {
+                        <span class="k">break</span>;
+                    }
+                    writeItemsets(candidatesFile, ck);
+                }
+
+                Path jobOut = <span class="k">new</span> Path(<span class="k">new</span> File(outRoot, <span class="s">&quot;L&quot;</span> + k).getAbsolutePath());
+                <span class="k">boolean</span> ok = runCountJob(transactions, jobOut, k, minSupport,
+                        k &gt;= <span class="n">2</span> ? candidatesFile.getAbsolutePath() : <span class="k">null</span>);
+                <span class="k">if</span> (!ok) {
+                    System.err.println(<span class="s">&quot;Job for k=&quot;</span> + k + <span class="s">&quot; failed&quot;</span>);
+                    System.exit(<span class="n">1</span>);
+                }
+
+                List&lt;<span class="k">int</span>[]&gt; lk = readFrequentFromJob(<span class="k">new</span> File(outRoot, <span class="s">&quot;L&quot;</span> + k));
+                System.out.println(<span class="s">&quot;k=&quot;</span> + k + <span class="s">&quot; |L&quot;</span> + k + <span class="s">&quot;|=&quot;</span> + lk.size());
+                <span class="k">if</span> (lk.isEmpty()) {
+                    <span class="k">break</span>;
+                }
+
+                <span class="k">if</span> (k &gt;= <span class="n">2</span>) {
+                    listing.write(<span class="s">&quot;# size &quot;</span> + k);
+                    listing.newLine();
+                    appendJobOutput(<span class="k">new</span> File(outRoot, <span class="s">&quot;L&quot;</span> + k), listing);
+                    listing.newLine();
+                }
+
+                previous = lk;
+            }
+        }
+
+        System.out.println(<span class="s">&quot;Frequent itemsets (k&gt;=2) written to &quot;</span> + combined.getAbsolutePath());
+    }
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">boolean</span> runCountJob(Path input, Path output, <span class="k">int</span> k, <span class="k">int</span> minSupport,
+                                       String candidatesPath) <span class="k">throws</span> Exception {
+        Configuration conf = <span class="k">new</span> Configuration();
+        conf.set(<span class="s">&quot;fs.defaultFS&quot;</span>, <span class="s">&quot;file:///&quot;</span>);
+        conf.set(<span class="s">&quot;mapreduce.framework.name&quot;</span>, <span class="s">&quot;local&quot;</span>);
+        conf.setInt(MIN_SUPPORT, minSupport);
+        conf.setInt(ITEMSET_K, k);
+        <span class="k">if</span> (candidatesPath != <span class="k">null</span>) {
+            conf.set(CANDIDATES_PATH, candidatesPath);
+        }
+
+        Job job = Job.getInstance(conf, <span class="s">&quot;MR-Apriori k=&quot;</span> + k);
+        job.setJarByClass(MRApriori.<span class="k">class</span>);
+        job.setMapperClass(CandidateCountMapper.<span class="k">class</span>);
+        job.setCombinerClass(SumCombiner.<span class="k">class</span>);
+        job.setReducerClass(SupportReducer.<span class="k">class</span>);
+        job.setOutputKeyClass(Text.<span class="k">class</span>);
+        job.setOutputValueClass(IntWritable.<span class="k">class</span>);
+
+        FileInputFormat.addInputPath(job, input);
+        FileOutputFormat.setOutputPath(job, output);
+        <span class="k">return</span> job.waitForCompletion(<span class="k">true</span>);
+    }
+
+    <span class="k">static</span> List&lt;<span class="k">int</span>[]&gt; readItemsets(String path) <span class="k">throws</span> IOException {
+        List&lt;<span class="k">int</span>[]&gt; list = <span class="k">new</span> ArrayList&lt;&gt;();
+        <span class="k">try</span> (BufferedReader br = <span class="k">new</span> BufferedReader(<span class="k">new</span> FileReader(path))) {
+            String line;
+            <span class="k">while</span> ((line = br.readLine()) != <span class="k">null</span>) {
+                line = line.trim();
+                <span class="k">if</span> (line.isEmpty() || line.startsWith(<span class="s">&quot;#&quot;</span>)) {
+                    <span class="k">continue</span>;
+                }
+                list.add(Itemset.parse(line));
+            }
+        }
+        <span class="k">return</span> list;
+    }
+
+    <span class="k">static</span> <span class="k">void</span> writeItemsets(File file, List&lt;<span class="k">int</span>[]&gt; itemsets) <span class="k">throws</span> IOException {
+        <span class="k">try</span> (BufferedWriter bw = <span class="k">new</span> BufferedWriter(<span class="k">new</span> FileWriter(file))) {
+            <span class="k">for</span> (<span class="k">int</span>[] items : itemsets) {
+                bw.write(Itemset.toKey(items));
+                bw.newLine();
+            }
+        }
+    }
+
+    <span class="k">static</span> List&lt;<span class="k">int</span>[]&gt; readFrequentFromJob(File jobOutDir) <span class="k">throws</span> IOException {
+        List&lt;<span class="k">int</span>[]&gt; list = <span class="k">new</span> ArrayList&lt;&gt;();
+        File[] parts = jobOutDir.listFiles((dir, name) -&gt; name.startsWith(<span class="s">&quot;part-&quot;</span>));
+        <span class="k">if</span> (parts == <span class="k">null</span>) {
+            <span class="k">return</span> list;
+        }
+        <span class="k">for</span> (File part : parts) {
+            <span class="k">try</span> (BufferedReader br = <span class="k">new</span> BufferedReader(<span class="k">new</span> FileReader(part))) {
+                String line;
+                <span class="k">while</span> ((line = br.readLine()) != <span class="k">null</span>) {
+                    String[] kv = line.split(<span class="s">&quot;\\t&quot;</span>, <span class="n">2</span>);
+                    <span class="k">if</span> (kv.length == <span class="n">0</span> || kv[<span class="n">0</span>].isBlank()) {
+                        <span class="k">continue</span>;
+                    }
+                    list.add(Itemset.parse(kv[<span class="n">0</span>]));
+                }
+            }
+        }
+        <span class="k">return</span> list;
+    }
+
+    <span class="k">static</span> <span class="k">void</span> appendJobOutput(File jobOutDir, BufferedWriter dest) <span class="k">throws</span> IOException {
+        File[] parts = jobOutDir.listFiles((dir, name) -&gt; name.startsWith(<span class="s">&quot;part-&quot;</span>));
+        <span class="k">if</span> (parts == <span class="k">null</span>) {
+            <span class="k">return</span>;
+        }
+        <span class="k">for</span> (File part : parts) {
+            dest.write(Files.readString(part.toPath()));
+        }
+    }
+}
+</pre>

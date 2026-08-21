@@ -1,0 +1,128 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Itemset.java</title>
+<style>
+body{margin:0;background:#1e1e1e;color:#d4d4d4;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#252526;color:#cccccc;padding:8px 14px;font-size:12px;border-bottom:1px solid #333}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.k{color:#569cd6}.c{color:#6a9955}.s{color:#ce9178}.n{color:#b5cea8}
+</style>
+<div class="bar">Itemset.java</div>
+<pre><span class="k">package</span> pmj.bdp.mr.lab3;
+
+<span class="k">import</span> java.util.ArrayList;
+<span class="k">import</span> java.util.Arrays;
+<span class="k">import</span> java.util.HashSet;
+<span class="k">import</span> java.util.List;
+<span class="k">import</span> java.util.Set;
+
+<span class="c">/**
+ * Sorted integer itemset helpers for MR-Apriori.
+ */</span>
+<span class="k">public</span> <span class="k">final</span> <span class="k">class</span> Itemset {
+
+    <span class="k">private</span> Itemset() {
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">int</span>[] parse(String text) {
+        String[] parts = text.trim().split(<span class="s">&quot;,&quot;</span>);
+        <span class="k">int</span>[] items = <span class="k">new</span> <span class="k">int</span>[parts.length];
+        <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; parts.length; i++) {
+            items[i] = Integer.parseInt(parts[i].trim());
+        }
+        Arrays.sort(items);
+        <span class="k">return</span> items;
+    }
+
+    <span class="k">public</span> <span class="k">static</span> String toKey(<span class="k">int</span>[] items) {
+        StringBuilder sb = <span class="k">new</span> StringBuilder();
+        <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; items.length; i++) {
+            <span class="k">if</span> (i &gt; <span class="n">0</span>) {
+                sb.append(<span class="s">&#x27;,&#x27;</span>);
+            }
+            sb.append(items[i]);
+        }
+        <span class="k">return</span> sb.toString();
+    }
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">boolean</span> containsAll(Set&lt;Integer&gt; transaction, <span class="k">int</span>[] candidate) {
+        <span class="k">for</span> (<span class="k">int</span> item : candidate) {
+            <span class="k">if</span> (!transaction.contains(item)) {
+                <span class="k">return</span> <span class="k">false</span>;
+            }
+        }
+        <span class="k">return</span> <span class="k">true</span>;
+    }
+
+    <span class="c">/**
+     * Apriori-gen: self-join L_{k-1} then prune candidates whose
+     * (k-1)-subsets are not all frequent.
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> List&lt;<span class="k">int</span>[]&gt; generateCandidates(List&lt;<span class="k">int</span>[]&gt; previous) {
+        List&lt;<span class="k">int</span>[]&gt; candidates = <span class="k">new</span> ArrayList&lt;&gt;();
+        <span class="k">if</span> (previous.isEmpty()) {
+            <span class="k">return</span> candidates;
+        }
+        <span class="k">int</span> kMinus1 = previous.get(<span class="n">0</span>).length;
+        Set&lt;String&gt; frequent = <span class="k">new</span> HashSet&lt;&gt;();
+        <span class="k">for</span> (<span class="k">int</span>[] itemset : previous) {
+            frequent.add(toKey(itemset));
+        }
+
+        <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; previous.size(); i++) {
+            <span class="k">int</span>[] a = previous.get(i);
+            <span class="k">for</span> (<span class="k">int</span> j = i + <span class="n">1</span>; j &lt; previous.size(); j++) {
+                <span class="k">int</span>[] b = previous.get(j);
+                <span class="k">if</span> (!prefixEqual(a, b, kMinus1 - <span class="n">1</span>)) {
+                    <span class="k">continue</span>;
+                }
+                <span class="c">// last items differ; keep them sorted</span>
+                <span class="k">int</span> lastA = a[kMinus1 - <span class="n">1</span>];
+                <span class="k">int</span> lastB = b[kMinus1 - <span class="n">1</span>];
+                <span class="k">if</span> (lastA == lastB) {
+                    <span class="k">continue</span>;
+                }
+                <span class="k">int</span>[] cand = <span class="k">new</span> <span class="k">int</span>[kMinus1 + <span class="n">1</span>];
+                System.arraycopy(a, <span class="n">0</span>, cand, <span class="n">0</span>, kMinus1 - <span class="n">1</span>);
+                <span class="k">if</span> (lastA &lt; lastB) {
+                    cand[kMinus1 - <span class="n">1</span>] = lastA;
+                    cand[kMinus1] = lastB;
+                } <span class="k">else</span> {
+                    cand[kMinus1 - <span class="n">1</span>] = lastB;
+                    cand[kMinus1] = lastA;
+                }
+                <span class="k">if</span> (allSubsetsFrequent(cand, frequent)) {
+                    candidates.add(cand);
+                }
+            }
+        }
+        <span class="k">return</span> candidates;
+    }
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">boolean</span> prefixEqual(<span class="k">int</span>[] a, <span class="k">int</span>[] b, <span class="k">int</span> len) {
+        <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; len; i++) {
+            <span class="k">if</span> (a[i] != b[i]) {
+                <span class="k">return</span> <span class="k">false</span>;
+            }
+        }
+        <span class="k">return</span> <span class="k">true</span>;
+    }
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">boolean</span> allSubsetsFrequent(<span class="k">int</span>[] candidate, Set&lt;String&gt; frequent) {
+        <span class="k">int</span> k = candidate.length;
+        <span class="k">int</span>[] subset = <span class="k">new</span> <span class="k">int</span>[k - <span class="n">1</span>];
+        <span class="k">for</span> (<span class="k">int</span> drop = <span class="n">0</span>; drop &lt; k; drop++) {
+            <span class="k">int</span> idx = <span class="n">0</span>;
+            <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; k; i++) {
+                <span class="k">if</span> (i != drop) {
+                    subset[idx++] = candidate[i];
+                }
+            }
+            <span class="k">if</span> (!frequent.contains(toKey(subset))) {
+                <span class="k">return</span> <span class="k">false</span>;
+            }
+        }
+        <span class="k">return</span> <span class="k">true</span>;
+    }
+}
+</pre>

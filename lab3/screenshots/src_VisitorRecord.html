@@ -1,0 +1,105 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>VisitorRecord.java</title>
+<style>
+body{margin:0;background:#1e1e1e;color:#d4d4d4;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#252526;color:#cccccc;padding:8px 14px;font-size:12px;border-bottom:1px solid #333}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.k{color:#569cd6}.c{color:#6a9955}.s{color:#ce9178}.n{color:#b5cea8}
+</style>
+<div class="bar">VisitorRecord.java</div>
+<pre><span class="k">package</span> pmj.bdp.mr.lab3;
+
+<span class="k">import</span> java.util.ArrayList;
+<span class="k">import</span> java.util.List;
+
+<span class="c">/**
+ * One row of daily-website-visitors.csv.
+ * Numbers may be quoted and contain commas (e.g. &quot;2,146&quot;).
+ */</span>
+<span class="k">public</span> <span class="k">final</span> <span class="k">class</span> VisitorRecord {
+
+    <span class="k">public</span> <span class="k">final</span> <span class="k">int</span> year;
+    <span class="k">public</span> <span class="k">final</span> <span class="k">int</span> month;
+    <span class="k">public</span> <span class="k">final</span> <span class="k">double</span> firstTimeVisits;
+    <span class="k">public</span> <span class="k">final</span> <span class="k">double</span> returningVisits;
+
+    <span class="k">private</span> VisitorRecord(<span class="k">int</span> year, <span class="k">int</span> month,
+                          <span class="k">double</span> firstTimeVisits, <span class="k">double</span> returningVisits) {
+        <span class="k">this</span>.year = year;
+        <span class="k">this</span>.month = month;
+        <span class="k">this</span>.firstTimeVisits = firstTimeVisits;
+        <span class="k">this</span>.returningVisits = returningVisits;
+    }
+
+    <span class="c">/** YYYYMM, e.g. 201409, used as a sortable month timestamp. */</span>
+    <span class="k">public</span> <span class="k">long</span> yearMonth() {
+        <span class="k">return</span> year * <span class="n">100</span>L + month;
+    }
+
+    <span class="k">public</span> <span class="k">static</span> VisitorRecord parse(String line) {
+        <span class="k">if</span> (line == <span class="k">null</span> || line.isBlank()) {
+            <span class="k">return</span> <span class="k">null</span>;
+        }
+        <span class="k">if</span> (line.startsWith(<span class="s">&quot;Row&quot;</span>) || line.startsWith(<span class="s">&quot;\uFEFFRow&quot;</span>)) {
+            <span class="k">return</span> <span class="k">null</span>;
+        }
+
+        List&lt;String&gt; fields = splitCsv(line);
+        <span class="c">// Row, Day, Day.Of.Week, Date, Page.Loads, Unique.Visits,</span>
+        <span class="c">// First.Time.Visits, Returning.Visits</span>
+        <span class="k">if</span> (fields.size() &lt; <span class="n">8</span>) {
+            <span class="k">return</span> <span class="k">null</span>;
+        }
+
+        <span class="k">try</span> {
+            <span class="k">int</span>[] ymd = parseDate(fields.get(<span class="n">3</span>).trim());
+            <span class="k">if</span> (ymd == <span class="k">null</span>) {
+                <span class="k">return</span> <span class="k">null</span>;
+            }
+            <span class="k">double</span> first = parseNumber(fields.get(<span class="n">6</span>));
+            <span class="k">double</span> returning = parseNumber(fields.get(<span class="n">7</span>));
+            <span class="k">return</span> <span class="k">new</span> VisitorRecord(ymd[<span class="n">0</span>], ymd[<span class="n">1</span>], first, returning);
+        } <span class="k">catch</span> (NumberFormatException e) {
+            <span class="k">return</span> <span class="k">null</span>;
+        }
+    }
+
+    <span class="c">/** Date in M/d/yyyy. Returns {year, month, day} or null. */</span>
+    <span class="k">static</span> <span class="k">int</span>[] parseDate(String raw) {
+        String[] parts = raw.split(<span class="s">&quot;/&quot;</span>);
+        <span class="k">if</span> (parts.length != <span class="n">3</span>) {
+            <span class="k">return</span> <span class="k">null</span>;
+        }
+        <span class="k">int</span> month = Integer.parseInt(parts[<span class="n">0</span>].trim());
+        <span class="k">int</span> day = Integer.parseInt(parts[<span class="n">1</span>].trim());
+        <span class="k">int</span> year = Integer.parseInt(parts[<span class="n">2</span>].trim());
+        <span class="k">return</span> <span class="k">new</span> <span class="k">int</span>[] {year, month, day};
+    }
+
+    <span class="k">static</span> <span class="k">double</span> parseNumber(String raw) {
+        String s = raw.trim().replace(<span class="s">&quot;\&quot;&quot;</span>, <span class="s">&quot;&quot;</span>).replace(<span class="s">&quot;,&quot;</span>, <span class="s">&quot;&quot;</span>).replace(<span class="s">&quot; &quot;</span>, <span class="s">&quot;&quot;</span>);
+        <span class="k">return</span> Double.parseDouble(s);
+    }
+
+    <span class="k">static</span> List&lt;String&gt; splitCsv(String line) {
+        List&lt;String&gt; fields = <span class="k">new</span> ArrayList&lt;&gt;();
+        StringBuilder cur = <span class="k">new</span> StringBuilder();
+        <span class="k">boolean</span> inQuotes = <span class="k">false</span>;
+
+        <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i &lt; line.length(); i++) {
+            <span class="k">char</span> c = line.charAt(i);
+            <span class="k">if</span> (c == <span class="s">&#x27;&quot;&#x27;</span>) {
+                inQuotes = !inQuotes;
+            } <span class="k">else</span> <span class="k">if</span> (c == <span class="s">&#x27;,&#x27;</span> &amp;&amp; !inQuotes) {
+                fields.add(cur.toString());
+                cur.setLength(<span class="n">0</span>);
+            } <span class="k">else</span> {
+                cur.append(c);
+            }
+        }
+        fields.add(cur.toString());
+        <span class="k">return</span> fields;
+    }
+}
+</pre>

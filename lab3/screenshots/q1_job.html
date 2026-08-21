@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Terminal — Exercise 1 Monthly Moving Average</title>
+<style>
+body{margin:0;background:#1c1c1e;color:#e6e6e8;font:13px/1.45 Menlo,Monaco,Consolas,monospace}
+.bar{background:#323236;padding:8px 14px;color:#8e8e93;display:flex;align-items:center;gap:8px;font-size:12px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.t{flex:1;text-align:center}
+pre{margin:14px 16px 18px;white-space:pre-wrap}
+.p{color:#66bb6a}.cmd{color:#fff}.ok{color:#30d158}.dim{color:#8e8e93}.info{color:#64d2ff}
+</style>
+<div class="bar">
+<span class="dot" style="background:#ff5f56"></span>
+<span class="dot" style="background:#ffbd2e"></span>
+<span class="dot" style="background:#27c93f"></span>
+<span class="t">Terminal — Exercise 1 Monthly Moving Average</span>
+</div>
+<pre><span class="p">~/IE-494/lab3 %</span> <span class="cmd">hadoop jar target/lab3.jar pmj.bdp.mr.lab3.MonthlyMovingAverage data/daily-website-visitors.csv output/q1_moving_average</span>
+<span class="dim">2026-08-21 18:28:33 INFO mapreduce.Job: Running job: job_local1339732198_0001</span>
+<span class="dim">2026-08-21 18:28:34 INFO mapreduce.Job:  map 100% reduce 100%</span>
+<span class="ok">2026-08-21 18:28:34 INFO mapreduce.Job: Job job_local1339732198_0001 completed successfully</span>
+<span class="info">Map input records=2168   Map output records=4334   Reduce output records=140</span>
+
+<span class="p">~/IE-494/lab3 %</span> <span class="cmd">cat output/q1_moving_average/part-*</span>
+<span class="dim"># series    YYYY-MM    monthlyTotal    movingAverage (window=3)</span>
+FirstTime    2014-11    70591    60556.33
+FirstTime    2014-12    64677    70268.00
+FirstTime    2015-01    57010    64092.67
+FirstTime    2015-02    72442    64709.67
+FirstTime    2015-03    87639    72363.67
+FirstTime    2015-04    92197    84092.67
+FirstTime    2015-05    84697    88177.67
+FirstTime    2015-06    65018    80637.33
+FirstTime    2015-07    56209    68641.33
+FirstTime    2015-08    56300    59175.67
+FirstTime    2015-09    70410    60973.00
+FirstTime    2015-10    86311    71007.00
+<span class="dim">...</span>
+FirstTime    2020-04    100478    88029.00
+FirstTime    2020-05    102424    94640.67
+FirstTime    2020-06    80704    94535.33
+FirstTime    2020-07    69157    84095.00
+FirstTime    2020-08    37435    62432.00</pre>
