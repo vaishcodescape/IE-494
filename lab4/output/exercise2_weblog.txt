@@ -1,0 +1,25 @@
+======== Q1  monthly requests and download size (MB) ========
+Year-Month	Requests	DownloadMB
+Dec-2015	14148	273.59
+Jan-2016	28224	1755.57
+Feb-2016	64262	1347.53
+
+======== Q2  most popular browser (User-Agent) ========
+browser	requests
+Chrome	60675
+Other	16894
+Firefox	13872
+Internet Explorer	4801
+Safari	4102
+Unknown	2557
+Bot	2470
+Opera	764
+Edge	499
+MOST POPULAR BROWSER = Chrome  (60675 requests)
+
+======== Q2b  top exact User-Agent strings ========
+53442	Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36
+13463	Go-http-client/1.1
+5142	Mozilla/5.0 (Windows NT 6.0; rv:34.0) Gecko/20100101 Firefox/34.0
+3559	Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0
+2548	-
