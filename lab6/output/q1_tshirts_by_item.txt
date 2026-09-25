@@ -1,0 +1,6 @@
+item	amount
+blue-tshirt	120
+green-tshirt	60
+navy-tshirt	45
+red-tshirt	80
+white-tshirt	40

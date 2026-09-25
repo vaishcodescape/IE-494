@@ -1,0 +1,8 @@
+term	weight
+theta0 (intercept)	-14441.9819271577
+theta1 (x1 date)	5.1490165776
+theta2 (x2 age)	-0.2696967339
+theta3 (x3 MRT m)	-0.0044875082
+theta4 (x4 stores)	1.1333249889
+theta5 (x5 lat)	225.4701393032
+theta6 (x6 lon)	-12.4290563903

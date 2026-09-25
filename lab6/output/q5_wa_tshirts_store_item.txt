@@ -1,0 +1,5 @@
+store	item	amount
+store1	blue-tshirt	120
+store1	navy-tshirt	45
+store1	red-tshirt	80
+store2	green-tshirt	60

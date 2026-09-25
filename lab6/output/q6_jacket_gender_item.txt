@@ -1,0 +1,5 @@
+gender	item	amount
+F	denim-jacket	220
+F	rain-jacket	180
+M	bomber-jacket	250
+M	leather-jacket	300

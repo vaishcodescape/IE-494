@@ -1,0 +1,101 @@
+==> Building...
+
+==> Lab 06  data=/Users/avaish/IE-494/lab6/data  cube=/Users/avaish/IE-494/lab6/SalesCube
+loading denormalized sales from sales.csv
+sales facts = 10
+materialized SalesCube -> /Users/avaish/IE-494/lab6/SalesCube
+
+======== lattice summary (cells per cuboid granularity) ========
+k	#cells
+0	1
+1	24
+2	105
+3	174
+4	142
+5	59
+6	10
+cuboids in lattice = 64  (2^6)
+materialized cells = 515
+
+SalesCube schema:
+root
+ |-- item: string (nullable = true)
+ |-- category: string (nullable = true)
+ |-- store: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- customer: string (nullable = true)
+ |-- gender: string (nullable = true)
+ |-- amount: double (nullable = true)
+
+SalesCube cells = 515
+
+======== Q1  Tshirts by item ========
++------------+------+
+|item        |amount|
++------------+------+
+|blue-tshirt |120.0 |
+|green-tshirt|60.0  |
+|navy-tshirt |45.0  |
+|red-tshirt  |80.0  |
+|white-tshirt|40.0  |
++------------+------+
+
+wrote /Users/avaish/IE-494/lab6/output/q1_tshirts_by_item.txt
+
+======== Q2  Tshirts at store1 by item ========
++-----------+------+
+|item       |amount|
++-----------+------+
+|blue-tshirt|120.0 |
+|navy-tshirt|45.0  |
+|red-tshirt |80.0  |
++-----------+------+
+
+wrote /Users/avaish/IE-494/lab6/output/q2_tshirts_store1.txt
+
+======== Q3  total sales of cust1 ========
++------+
+|amount|
++------+
+|865.0 |
++------+
+
+wrote /Users/avaish/IE-494/lab6/output/q3_cust1_total.txt
+
+======== Q4  cust1 Tshirts by item ========
++------------+------+
+|item        |amount|
++------------+------+
+|blue-tshirt |120.0 |
+|green-tshirt|60.0  |
+|navy-tshirt |45.0  |
++------------+------+
+
+wrote /Users/avaish/IE-494/lab6/output/q4_cust1_tshirts.txt
+
+======== Q5  WA Tshirts by store, item ========
++------+------------+------+
+|store |item        |amount|
++------+------------+------+
+|store1|blue-tshirt |120.0 |
+|store1|navy-tshirt |45.0  |
+|store1|red-tshirt  |80.0  |
+|store2|green-tshirt|60.0  |
++------+------------+------+
+
+wrote /Users/avaish/IE-494/lab6/output/q5_wa_tshirts_store_item.txt
+
+======== Q6  Jacket by gender, item ========
++------+--------------+------+
+|gender|item          |amount|
++------+--------------+------+
+|F     |denim-jacket  |220.0 |
+|F     |rain-jacket   |180.0 |
+|M     |bomber-jacket |250.0 |
+|M     |leather-jacket|300.0 |
++------+--------------+------+
+
+wrote /Users/avaish/IE-494/lab6/output/q6_jacket_gender_item.txt
+
+Done. Parquet cube: /Users/avaish/IE-494/lab6/SalesCube
+Query tables: /Users/avaish/IE-494/lab6/output

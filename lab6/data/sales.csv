@@ -1,0 +1,11 @@
+item,category,store,state,customer,gender,amount
+blue-tshirt,Tshirts,store1,WA,cust1,M,120
+red-tshirt,Tshirts,store1,WA,cust2,F,80
+green-tshirt,Tshirts,store2,WA,cust1,M,60
+white-tshirt,Tshirts,store3,CA,cust3,F,40
+navy-tshirt,Tshirts,store1,WA,cust1,M,45
+leather-jacket,Jacket,store1,WA,cust1,M,300
+denim-jacket,Jacket,store2,CA,cust2,F,220
+rain-jacket,Jacket,store1,WA,cust4,F,180
+bomber-jacket,Jacket,store3,CA,cust1,M,250
+hoodie,Hoodies,store1,WA,cust1,M,90
