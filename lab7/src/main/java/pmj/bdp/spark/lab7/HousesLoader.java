@@ -27,6 +27,7 @@ public final class HousesLoader {
                 .add("x5", DataTypes.DoubleType, false)
                 .add("x6", DataTypes.DoubleType, false)
                 .add("y", DataTypes.DoubleType, false);
+                
         return spark.read()
                 .option("header", "true")
                 .schema(schema)

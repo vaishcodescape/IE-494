@@ -1,10 +1,11 @@
-//Map-Reduce function implementation in Java
+// Map-Reduce function implementation in Java
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class map_reduce {
-    public static void main(String[] args) {
+    void main() {
         System.out.println("Hello, World!");
     }
 }
