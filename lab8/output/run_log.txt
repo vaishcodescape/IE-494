@@ -1,0 +1,117 @@
+ORDERS.TBL   = /Users/avaish/IE-494/lab8/data/orders.tbl (170452161 bytes)
+LINEITEM.TBL = /Users/avaish/IE-494/lab8/data/lineitem.tbl (753862072 bytes)
+  ORDERS rows 500,000 in 0.7s
+  ORDERS rows 1,000,000 in 1.7s
+  ORDERS rows 1,500,000 in 2.4s
+
+======== Task 1 ORDERS ========
+source file     : /Users/avaish/IE-494/lab8/data/orders.tbl
+rocksdb path    : /Users/avaish/IE-494/lab8/db/ORDERS
+rows read       : 1,500,000
+rows written    : 1,500,000
+duplicate keys  : 0
+malformed rows  : 0
+duplicate sample: (none)
+batch write     : 0.163 s
+total load      : 2.813 s
+db size         : 171,559,133 bytes (163.6 MiB)
+ORDERS key 0000000001 -> {"O_ORDERKEY":1,"O_CUSTKEY":36901,"O_ORDERSTATUS":"O","O_TOTALPRICE":173665.47,"O_ORDERDATE":"1996-01-02","O_ORDERPRIORITY":"5-LOW","O_CLERK":"Clerk#000000951","O_SHIPPRIORITY":0,"O_COMMENT":"nstructions sleep furiously among "}
+  LINEITEM rows 500,000 in 1.6s
+  LINEITEM rows 1,000,000 in 5.5s
+  LINEITEM rows 1,500,000 in 7.6s
+  LINEITEM rows 2,000,000 in 10.8s
+  LINEITEM rows 2,500,000 in 13.1s
+  LINEITEM rows 3,000,000 in 13.9s
+  LINEITEM rows 3,500,000 in 15.0s
+  LINEITEM rows 4,000,000 in 16.2s
+  LINEITEM rows 4,500,000 in 18.0s
+  LINEITEM rows 5,000,000 in 19.0s
+  LINEITEM rows 5,500,000 in 21.7s
+  LINEITEM rows 6,000,000 in 23.1s
+
+======== Task 1 LINEITEM ========
+source file     : /Users/avaish/IE-494/lab8/data/lineitem.tbl
+rocksdb path    : /Users/avaish/IE-494/lab8/db/LINEITEM
+rows read       : 6,001,215
+rows written    : 6,001,215
+duplicate keys  : 0
+malformed rows  : 0
+duplicate sample: (none)
+batch write     : 4.686 s
+total load      : 23.476 s
+db size         : 951,365,232 bytes (907.3 MiB)
+LINEITEM key 0000000001|01 -> {"L_ORDERKEY":1,"L_PARTKEY":155190,"L_SUPPKEY":7706,"L_LINENUMBER":1,"L_QUANTITY":17,"L_EXTENDEDPRICE":21168.23,"L_DISCOUNT":0.04,"L_TAX":0.02,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-03-13","L_COMMITDATE":"1996-02-12","L_RECEIPTDATE":"1996-03-22","L_SHIPINSTRUCT":"DELIVER IN PERSON","L_SHIPMODE":"TRUCK","L_COMMENT":"egular courts above the"}
+
+Duplicate key report
+ORDERS rows read: 1500000
+ORDERS duplicate keys: 0
+ORDERS malformed rows: 0
+ORDERS duplicate samples: (none)
+LINEITEM rows read: 6001215
+LINEITEM duplicate keys: 0
+LINEITEM malformed rows: 0
+LINEITEM duplicate samples: (none)
+
+building CORDERS compression=none
+  CORDERS orders 500,000 in 14.5s
+  CORDERS orders 1,000,000 in 22.9s
+  CORDERS orders 1,500,000 in 26.2s
+
+======== CORDERS NO_COMPRESSION ========
+rocksdb path       : /Users/avaish/IE-494/lab8/db/CORDERS_none
+orders read        : 1,500,000
+line items embedded: 6,001,215
+documents written  : 1,500,000
+orphan line items  : 0
+insertion time     : 3.134 s
+total write time   : 26.488 s
+final db size      : 2,624,798,329 bytes (2503.2 MiB)
+read keys          : 1,500,000
+read bytes         : 2,595,603,403
+read throughput    : 632.5 MB/s
+sample key         : 0000000001
+sample value       : {"O_ORDERKEY":1,"O_CUSTKEY":36901,"O_ORDERSTATUS":"O","O_TOTALPRICE":173665.47,"O_ORDERDATE":"1996-01-02","O_ORDERPRIORITY":"5-LOW","O_CLERK":"Clerk#000000951","O_SHIPPRIORITY":0,"O_COMMENT":"nstructions sleep furiously among ","LINEITEMS":[{"L_ORDERKEY":1,"L_PARTKEY":155190,"L_SUPPKEY":7706,"L_LINENUMBER":1,"L_QUANTITY":17,"L_EXTENDEDPRICE":21168.23,"L_DISCOUNT":0.04,"L_TAX":0.02,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-03-13","L_COMMITDATE":"1996-02-12","L_RECEIPTDATE":"1996-03-22","L_SHIPINSTRUCT":"DELIVER IN PERSON","L_SHIPMODE":"TRUCK","L_COMMENT":"egular courts above the"},{"L_ORDERKEY":1,"L_PARTKEY":67310,"L_SUPPKEY":7311,"L_LINENUMBER":2,"L_QUANTITY":36,"L_EXTENDEDPRICE":45983.16,"L_DISCOUNT":0.09,"L_TAX":0.06,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-04-12","L_COMMITDATE":"1996-02-28","L_RECEIPTDATE":"1996-04-20","L_SHIPINSTRUCT":"TAKE BACK RETURN"...
+
+building CORDERS compression=lz4
+  CORDERS orders 500,000 in 5.3s
+  CORDERS orders 1,000,000 in 8.9s
+  CORDERS orders 1,500,000 in 14.3s
+
+======== CORDERS LZ4_COMPRESSION ========
+rocksdb path       : /Users/avaish/IE-494/lab8/db/CORDERS_lz4
+orders read        : 1,500,000
+line items embedded: 6,001,215
+documents written  : 1,500,000
+orphan line items  : 0
+insertion time     : 1.672 s
+total write time   : 14.473 s
+final db size      : 1,093,773,438 bytes (1043.1 MiB)
+read keys          : 1,500,000
+read bytes         : 2,595,603,403
+read throughput    : 939.7 MB/s
+sample key         : 0000000001
+sample value       : {"O_ORDERKEY":1,"O_CUSTKEY":36901,"O_ORDERSTATUS":"O","O_TOTALPRICE":173665.47,"O_ORDERDATE":"1996-01-02","O_ORDERPRIORITY":"5-LOW","O_CLERK":"Clerk#000000951","O_SHIPPRIORITY":0,"O_COMMENT":"nstructions sleep furiously among ","LINEITEMS":[{"L_ORDERKEY":1,"L_PARTKEY":155190,"L_SUPPKEY":7706,"L_LINENUMBER":1,"L_QUANTITY":17,"L_EXTENDEDPRICE":21168.23,"L_DISCOUNT":0.04,"L_TAX":0.02,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-03-13","L_COMMITDATE":"1996-02-12","L_RECEIPTDATE":"1996-03-22","L_SHIPINSTRUCT":"DELIVER IN PERSON","L_SHIPMODE":"TRUCK","L_COMMENT":"egular courts above the"},{"L_ORDERKEY":1,"L_PARTKEY":67310,"L_SUPPKEY":7311,"L_LINENUMBER":2,"L_QUANTITY":36,"L_EXTENDEDPRICE":45983.16,"L_DISCOUNT":0.09,"L_TAX":0.06,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-04-12","L_COMMITDATE":"1996-02-28","L_RECEIPTDATE":"1996-04-20","L_SHIPINSTRUCT":"TAKE BACK RETURN"...
+
+building CORDERS compression=zstd
+  CORDERS orders 500,000 in 4.1s
+  CORDERS orders 1,000,000 in 7.0s
+  CORDERS orders 1,500,000 in 9.9s
+
+======== CORDERS ZSTD_COMPRESSION ========
+rocksdb path       : /Users/avaish/IE-494/lab8/db/CORDERS_zstd
+orders read        : 1,500,000
+line items embedded: 6,001,215
+documents written  : 1,500,000
+orphan line items  : 0
+insertion time     : 0.211 s
+total write time   : 10.189 s
+final db size      : 700,709,592 bytes (668.2 MiB)
+read keys          : 1,500,000
+read bytes         : 2,595,603,403
+read throughput    : 537.8 MB/s
+sample key         : 0000000001
+sample value       : {"O_ORDERKEY":1,"O_CUSTKEY":36901,"O_ORDERSTATUS":"O","O_TOTALPRICE":173665.47,"O_ORDERDATE":"1996-01-02","O_ORDERPRIORITY":"5-LOW","O_CLERK":"Clerk#000000951","O_SHIPPRIORITY":0,"O_COMMENT":"nstructions sleep furiously among ","LINEITEMS":[{"L_ORDERKEY":1,"L_PARTKEY":155190,"L_SUPPKEY":7706,"L_LINENUMBER":1,"L_QUANTITY":17,"L_EXTENDEDPRICE":21168.23,"L_DISCOUNT":0.04,"L_TAX":0.02,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-03-13","L_COMMITDATE":"1996-02-12","L_RECEIPTDATE":"1996-03-22","L_SHIPINSTRUCT":"DELIVER IN PERSON","L_SHIPMODE":"TRUCK","L_COMMENT":"egular courts above the"},{"L_ORDERKEY":1,"L_PARTKEY":67310,"L_SUPPKEY":7311,"L_LINENUMBER":2,"L_QUANTITY":36,"L_EXTENDEDPRICE":45983.16,"L_DISCOUNT":0.09,"L_TAX":0.06,"L_RETURNFLAG":"N","L_LINESTATUS":"O","L_SHIPDATE":"1996-04-12","L_COMMITDATE":"1996-02-28","L_RECEIPTDATE":"1996-04-20","L_SHIPINSTRUCT":"TAKE BACK RETURN"...
+
+orders file   : /Users/avaish/IE-494/lab8/data/orders.tbl
+lineitem file : /Users/avaish/IE-494/lab8/data/lineitem.tbl
+metrics       : /Users/avaish/IE-494/lab8/output/compression.tsv

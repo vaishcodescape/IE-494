@@ -1,0 +1,9 @@
+Duplicate key report
+ORDERS rows read: 1500000
+ORDERS duplicate keys: 0
+ORDERS malformed rows: 0
+ORDERS duplicate samples: (none)
+LINEITEM rows read: 6001215
+LINEITEM duplicate keys: 0
+LINEITEM malformed rows: 0
+LINEITEM duplicate samples: (none)

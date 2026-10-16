@@ -22,3 +22,10 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Lab 8 TPC-H extracts, RocksDB stores, and the local gdown install
+lab8/data/**
+!lab8/data/.gitkeep
+lab8/db/
+lab8/tpch-kit/
+.pytools/
