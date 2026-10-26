@@ -29,3 +29,7 @@ lab8/data/**
 lab8/db/
 lab8/tpch-kit/
 .pytools/
+
+# Lab 9 corders.json dump and RocksDB stores
+lab9/data/
+lab9/db/

@@ -1,0 +1,175 @@
+======== UNIVERSAL final SSTables (/Users/avaish/IE-494/lab9/db/universal/CORDERS) ========
+orders loaded 1,500,000, load 6.456 s, flush + settle 5.974 s, db directory 760,633,659 bytes
+  SSTables final: 13 files, 760,621,019 bytes, L0=1 L6=12
+      file-name   level     file-size  smallest-key largest-key
+      000035.sst  L0       10,187,938  0005920001   0006000000
+      000036.sst  L6       67,204,013  0000000001   0000529860
+      000037.sst  L6       67,201,977  0000529861   0001060352
+      000038.sst  L6       67,192,231  0001060353   0001590949
+      000039.sst  L6       67,194,260  0001590950   0002120322
+      000040.sst  L6       67,206,723  0002120323   0002651335
+      000041.sst  L6       67,200,041  0002651360   0003181378
+      000042.sst  L6       67,205,695  0003181379   0003710595
+      000043.sst  L6       67,195,863  0003710596   0004241248
+      000044.sst  L6       67,196,029  0004241249   0004771076
+      000045.sst  L6       67,207,959  0004771077   0005301670
+      000046.sst  L6       67,203,271  0005301671   0005831780
+      000047.sst  L6       11,225,019  0005831781   0005920000
+
+Table properties and index block of each SSTable (first/last 3 index entries; all entries are in index_dump.txt):
+
+  000035.sst  L0  10,187,938 bytes  keys 0005920001 .. 0006000000
+    entries 20,000, data blocks 540, data 10,174,586 B, index 12,205 B, raw key 360,000 B, raw value 34,465,440 B, LZ4, format_version 5
+    index block @ 10,174,586 (12,200 B), 540 entries, 540 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0005920163                  0     19,153
+            2  0005920291             19,158     18,956
+            3  0005920448             38,119     19,057
+          ...  (534 more entries)
+          538  0005999781         10,131,488     18,521
+          539  0005999942         10,150,014     19,282
+          540  0006000000         10,169,301      5,280
+
+  000036.sst  L6  67,204,013 bytes  keys 0000000001 .. 0000529860
+    entries 132,468, data blocks 3,556, data 67,122,051 B, index 80,821 B, raw key 2,384,424 B, raw value 227,406,124 B, LZ4, format_version 5
+    index block @ 67,122,051 (80,816 B), 3,556 entries, 3556 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0000000134                  0     18,935
+            2  000000029              18,940     19,043
+            3  000000045              37,988     18,995
+          ...  (3,550 more entries)
+         3554  0000529730         67,082,954     19,080
+         3555  000052986          67,102,039     19,083
+         3556  0000529860         67,121,127        919
+
+  000037.sst  L6  67,201,977 bytes  keys 0000529861 .. 0001060352
+    entries 132,620, data blocks 3,557, data 67,120,070 B, index 80,766 B, raw key 2,387,160 B, raw value 227,501,272 B, LZ4, format_version 5
+    index block @ 67,120,070 (80,761 B), 3,557 entries, 3557 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0000530018                  0     19,028
+            2  0000530177             19,033     18,746
+            3  000053034              37,784     18,900
+          ...  (3,551 more entries)
+         3555  0001060197         67,081,475     18,676
+         3556  000106033          67,100,156     18,951
+         3557  0001060352         67,119,112        953
+
+  000038.sst  L6  67,192,231 bytes  keys 0001060353 .. 0001590949
+    entries 132,653, data blocks 3,567, data 67,109,993 B, index 81,097 B, raw key 2,387,754 B, raw value 228,088,982 B, LZ4, format_version 5
+    index block @ 67,109,993 (81,092 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0001060485                  0     18,617
+            2  0001060642             18,622     19,005
+            3  0001060774             37,632     18,822
+          ...  (3,561 more entries)
+         3565  0001590787         67,071,324     18,913
+         3566  0001590948         67,090,242     19,062
+         3567  0001590949         67,109,309        679
+
+  000039.sst  L6  67,194,260 bytes  keys 0001590950 .. 0002120322
+    entries 132,341, data blocks 3,567, data 67,112,065 B, index 81,054 B, raw key 2,382,138 B, raw value 228,095,441 B, LZ4, format_version 5
+    index block @ 67,112,065 (81,049 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0001591136                  0     19,286
+            2  0001591266             19,291     18,554
+            3  0001591398             37,850     18,911
+          ...  (3,561 more entries)
+         3565  0002120164         67,073,584     18,986
+         3566  0002120321         67,092,575     18,586
+         3567  0002120322         67,111,166        894
+
+  000040.sst  L6  67,206,723 bytes  keys 0002120323 .. 0002651335
+    entries 132,757, data blocks 3,567, data 67,124,501 B, index 81,081 B, raw key 2,389,626 B, raw value 228,097,053 B, LZ4, format_version 5
+    index block @ 67,124,501 (81,076 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0002120482                  0     18,904
+            2  0002120642             18,909     18,569
+            3  0002120803             37,483     18,937
+          ...  (3,561 more entries)
+         3565  0002651201         67,086,269     18,520
+         3566  0002651334         67,104,794     18,431
+         3567  0002651335         67,123,230      1,266
+
+  000041.sst  L6  67,200,041 bytes  keys 0002651360 .. 0003181378
+    entries 132,507, data blocks 3,568, data 67,117,813 B, index 81,087 B, raw key 2,385,126 B, raw value 228,141,412 B, LZ4, format_version 5
+    index block @ 67,117,813 (81,082 B), 3,568 entries, 3568 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0002651490                  0     19,029
+            2  000265163              19,034     19,192
+            3  00026518               38,231     18,829
+          ...  (3,562 more entries)
+         3566  0003181221         67,079,337     18,859
+         3567  0003181377         67,098,201     18,596
+         3568  0003181378         67,116,802      1,006
+
+  000042.sst  L6  67,205,695 bytes  keys 0003181379 .. 0003710595
+    entries 132,305, data blocks 3,568, data 67,123,437 B, index 81,117 B, raw key 2,381,490 B, raw value 228,194,065 B, LZ4, format_version 5
+    index block @ 67,123,437 (81,112 B), 3,568 entries, 3568 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0003181537                  0     18,886
+            2  0003181665             18,891     18,737
+            3  0003181797             37,633     18,652
+          ...  (3,562 more entries)
+         3566  0003710438         67,085,235     18,604
+         3567  0003710594         67,103,844     18,543
+         3568  0003710595         67,122,392      1,040
+
+  000043.sst  L6  67,195,863 bytes  keys 0003710596 .. 0004241248
+    entries 132,661, data blocks 3,567, data 67,113,671 B, index 81,051 B, raw key 2,387,898 B, raw value 228,137,246 B, LZ4, format_version 5
+    index block @ 67,113,671 (81,046 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0003710753                  0     18,379
+            2  0003710915             18,384     19,053
+            3  0003711074             37,442     18,770
+          ...  (3,561 more entries)
+         3565  0004241092         67,075,150     18,412
+         3566  000424123          67,093,567     18,997
+         3567  0004241248         67,112,569      1,097
+
+  000044.sst  L6  67,196,029 bytes  keys 0004241249 .. 0004771076
+    entries 132,460, data blocks 3,567, data 67,113,808 B, index 81,080 B, raw key 2,384,280 B, raw value 228,127,911 B, LZ4, format_version 5
+    index block @ 67,113,808 (81,075 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0004241381                  0     18,362
+            2  000424152              18,367     18,874
+            3  000424168              37,246     19,266
+          ...  (3,561 more entries)
+         3565  0004770916         67,075,025     18,778
+         3566  0004771075         67,093,808     18,713
+         3567  0004771076         67,112,526      1,277
+
+  000045.sst  L6  67,207,959 bytes  keys 0004771077 .. 0005301670
+    entries 132,650, data blocks 3,566, data 67,125,831 B, index 80,987 B, raw key 2,387,700 B, raw value 228,108,235 B, LZ4, format_version 5
+    index block @ 67,125,831 (80,982 B), 3,566 entries, 3566 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0004771235                  0     18,613
+            2  0004771366             18,618     18,962
+            3  0004771526             37,585     18,997
+          ...  (3,560 more entries)
+         3564  0005301537         67,087,401     18,749
+         3565  000530167          67,106,155     18,653
+         3566  0005301670         67,124,813      1,013
+
+  000046.sst  L6  67,203,271 bytes  keys 0005301671 .. 0005831780
+    entries 132,526, data blocks 3,567, data 67,121,063 B, index 81,067 B, raw key 2,385,468 B, raw value 228,130,567 B, LZ4, format_version 5
+    index block @ 67,121,063 (81,062 B), 3,567 entries, 3567 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  000530184                   0     19,161
+            2  0005301986             19,166     18,659
+            3  0005302116             37,830     18,729
+          ...  (3,561 more entries)
+         3565  0005831622         67,082,561     18,833
+         3566  000583178          67,101,399     18,832
+         3567  0005831780         67,120,236        822
+
+  000047.sst  L6  11,225,019 bytes  keys 0005831781 .. 0005920000
+    entries 22,052, data blocks 596, data 11,210,426 B, index 13,454 B, raw key 396,936 B, raw value 38,109,655 B, LZ4, format_version 5
+    index block @ 11,210,426 (13,449 B), 596 entries, 596 restart points, user keys, delta-encoded handles; check OK (1 entry per data block, contiguous, ascending)
+        entry  separator-key    block-offset block-size
+            1  0005831937                  0     18,705
+            2  0005832096             18,710     18,977
+            3  0005832228             37,692     19,048
+          ...  (590 more entries)
+          594  00059197           11,155,614     18,680
+          595  0005919846         11,174,299     18,819
+          596  0005920000         11,193,123     17,298

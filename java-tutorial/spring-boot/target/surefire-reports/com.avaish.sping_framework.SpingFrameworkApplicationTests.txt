@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.avaish.sping_framework.SpingFrameworkApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.091 s -- in com.avaish.sping_framework.SpingFrameworkApplicationTests
