@@ -1,4 +1,4 @@
-//Java-Program
+//Spring Boot Application Class
 
 package com.avaish.sping_framework;
 

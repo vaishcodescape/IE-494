@@ -1,0 +1,35 @@
+customer.tbl = /Users/avaish/IE-494/lab8/data/customer.tbl (24196144 bytes)
+orders.tbl   = /Users/avaish/IE-494/lab8/data/orders.tbl (170452161 bytes)
+lineitem.tbl = /Users/avaish/IE-494/lab8/data/lineitem.tbl (753862072 bytes)
+
+---- phase 1: CUSTOMER -> profile items (pk=CUST#custkey, sk=PROFILE) ----
+  CUSTOMER submitted    100,000  written     99,200     42.3 s    2,344 items/s
+  CUSTOMER submitted    150,000  written    150,000     66.9 s    2,242 items/s
+
+---- phase 2: ORDERS + LINEITEM -> order items (pk=CUST#custkey, sk=ORDER#date#orderkey) ----
+  ORDER    submitted    100,000  written     99,200     65.8 s    1,507 items/s
+  ORDER    submitted    200,000  written    199,200    159.5 s    1,249 items/s
+  ORDER    submitted    300,000  written    299,200    276.4 s    1,082 items/s
+  ORDER    submitted    400,000  written    399,200    358.6 s    1,113 items/s
+  ORDER    submitted    500,000  written    499,200    432.8 s    1,154 items/s
+  ORDER    submitted    600,000  written    599,200    560.7 s    1,069 items/s
+  ORDER    submitted    700,000  written    699,200    753.0 s      929 items/s
+  ORDER    submitted    800,000  written    799,200    908.1 s      880 items/s
+  ORDER    submitted    900,000  written    899,200   1076.3 s      835 items/s
+  ORDER    submitted  1,000,000  written    999,200   1234.4 s      809 items/s
+  ORDER    submitted  1,100,000  written  1,099,200   1400.8 s      785 items/s
+  ORDER    submitted  1,200,000  written  1,199,200   1558.7 s      769 items/s
+  ORDER    submitted  1,300,000  written  1,299,200   1665.0 s      780 items/s
+  ORDER    submitted  1,400,000  written  1,399,200   1744.5 s      802 items/s
+  ORDER    submitted  1,500,000  written  1,499,200   1899.9 s      789 items/s
+  ORDER    submitted  1,500,000  written  1,500,000   1901.6 s      789 items/s
+
+======== load summary ========
+customer.tbl rows   : 150,000
+orders.tbl rows     : 1,500,000
+lineitem.tbl rows   : 6,001,215 (embedded in their orders)
+profile items put   : 150,000 in 66.9 s (2,242 items/s)
+order items put     : 1,500,000 in 1901.6 s (789 items/s)
+items in table      : 1,650,000
+batch retries       : 0 (unprocessed items re-sent)
+writer threads      : 8, 25 items per BatchWriteItem

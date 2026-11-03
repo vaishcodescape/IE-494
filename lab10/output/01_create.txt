@@ -1,0 +1,11 @@
+creating table TPCH (pk S, sk S) with GSI OrderIndex (orderkey N, KEYS_ONLY), on-demand capacity ...
+created.
+
+======== describe-table TPCH ========
+status               : ACTIVE
+billing              : PAY_PER_REQUEST
+key schema           : pk (HASH), sk (RANGE)
+attribute definitions: orderkey N  sk S  pk S
+GSI OrderIndex        : orderkey (HASH), projection KEYS_ONLY, status ACTIVE
+item count           : 0
+table size           : 0 bytes (0.0 MiB)

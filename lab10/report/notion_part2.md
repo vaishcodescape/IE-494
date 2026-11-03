@@ -1,0 +1,311 @@
+## Terminal output
+
+<toggle heading="h3">
+01_create.txt: create table TPCH + GSI OrderIndex
+
+```txt
+creating table TPCH (pk S, sk S) with GSI OrderIndex (orderkey N, KEYS_ONLY), on-demand capacity ...
+created.
+
+======== describe-table TPCH ========
+status               : ACTIVE
+billing              : PAY_PER_REQUEST
+key schema           : pk (HASH), sk (RANGE)
+attribute definitions: orderkey N  sk S  pk S
+GSI OrderIndex        : orderkey (HASH), projection KEYS_ONLY, status ACTIVE
+item count           : 0
+table size           : 0 bytes (0.0 MiB)
+```
+</toggle>
+
+<toggle heading="h3">
+02_load.txt: load customer.tbl, orders.tbl, lineitem.tbl
+
+```txt
+customer.tbl = /Users/avaish/IE-494/lab8/data/customer.tbl (24196144 bytes)
+orders.tbl   = /Users/avaish/IE-494/lab8/data/orders.tbl (170452161 bytes)
+lineitem.tbl = /Users/avaish/IE-494/lab8/data/lineitem.tbl (753862072 bytes)
+
+---- phase 1: CUSTOMER -> profile items (pk=CUST#custkey, sk=PROFILE) ----
+  CUSTOMER submitted    100,000  written     99,200     42.3 s    2,344 items/s
+  CUSTOMER submitted    150,000  written    150,000     66.9 s    2,242 items/s
+
+---- phase 2: ORDERS + LINEITEM -> order items (pk=CUST#custkey, sk=ORDER#date#orderkey) ----
+  ORDER    submitted    100,000  written     99,200     65.8 s    1,507 items/s
+  ORDER    submitted    200,000  written    199,200    159.5 s    1,249 items/s
+  ORDER    submitted    300,000  written    299,200    276.4 s    1,082 items/s
+  ORDER    submitted    400,000  written    399,200    358.6 s    1,113 items/s
+  ORDER    submitted    500,000  written    499,200    432.8 s    1,154 items/s
+  ORDER    submitted    600,000  written    599,200    560.7 s    1,069 items/s
+  ORDER    submitted    700,000  written    699,200    753.0 s      929 items/s
+  ORDER    submitted    800,000  written    799,200    908.1 s      880 items/s
+  ORDER    submitted    900,000  written    899,200   1076.3 s      835 items/s
+  ORDER    submitted  1,000,000  written    999,200   1234.4 s      809 items/s
+  ORDER    submitted  1,100,000  written  1,099,200   1400.8 s      785 items/s
+  ORDER    submitted  1,200,000  written  1,199,200   1558.7 s      769 items/s
+  ORDER    submitted  1,300,000  written  1,299,200   1665.0 s      780 items/s
+  ORDER    submitted  1,400,000  written  1,399,200   1744.5 s      802 items/s
+  ORDER    submitted  1,500,000  written  1,499,200   1899.9 s      789 items/s
+  ORDER    submitted  1,500,000  written  1,500,000   1901.6 s      789 items/s
+
+======== load summary ========
+customer.tbl rows   : 150,000
+orders.tbl rows     : 1,500,000
+lineitem.tbl rows   : 6,001,215 (embedded in their orders)
+profile items put   : 150,000 in 66.9 s (2,242 items/s)
+order items put     : 1,500,000 in 1901.6 s (789 items/s)
+items in table      : 1,650,000
+batch retries       : 0 (unprocessed items re-sent)
+writer threads      : 8, 25 items per BatchWriteItem
+```
+</toggle>
+
+<toggle heading="h3">
+03_describe.txt: describe-table after the load
+
+```txt
+
+======== describe-table TPCH ========
+status               : ACTIVE
+billing              : PAY_PER_REQUEST
+key schema           : pk (HASH), sk (RANGE)
+attribute definitions: orderkey N  sk S  pk S
+GSI OrderIndex        : orderkey (HASH), projection KEYS_ONLY, status ACTIVE
+item count           : 1,650,000
+table size           : 1,881,362,746 bytes (1794.2 MiB)
+```
+</toggle>
+
+<toggle heading="h3">
+Q1: retrieve the profile of customer 121
+
+```txt
+GetItem  pk=CUST#121  sk=PROFILE
+custkey    : 121
+name       : Customer#000000121
+address    : tv nCR2YKupGN73mQudO
+nationkey  : 17
+phone      : 27-411-990-2959
+acctbal    : 6428.32
+mktsegment : BUILDING
+comment    : uriously stealthy ideas. carefully final courts use carefully
+(1 GetItem, 98.1 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q2: all orders of customer 121
+
+```txt
+Query  pk=CUST#121  sk begins_with ORDER#
+orderdate  orderkey   status priority        clerk             totalprice lines
+1992-03-31 3177383    F      5-LOW           Clerk#000000789    188986.83     4
+1992-10-21 3279495    F      1-URGENT        Clerk#000000078    102928.39     5
+1993-06-24 3568994    F      5-LOW           Clerk#000000294    210567.55     4
+1993-10-16 2970276    F      1-URGENT        Clerk#000000270    110090.35     2
+1993-12-26 2383682    F      3-MEDIUM        Clerk#000000533      3087.81     1
+1994-01-24 3960641    F      5-LOW           Clerk#000000376     77312.55     2
+1994-04-09 2174404    F      3-MEDIUM        Clerk#000000397     55650.77     3
+1994-06-26 5512869    F      4-NOT SPECIFIED Clerk#000000408    133146.02     7
+1994-10-01 5299460    F      2-HIGH          Clerk#000000570    147099.69     5
+1994-10-10 202628     F      4-NOT SPECIFIED Clerk#000000179     85006.64     3
+1995-08-06 3797444    O      4-NOT SPECIFIED Clerk#000000779    210230.11     5
+1996-06-19 4240038    O      3-MEDIUM        Clerk#000000055    124670.76     2
+1997-09-02 464128     O      1-URGENT        Clerk#000000604    215871.48     6
+1997-12-31 5783393    O      4-NOT SPECIFIED Clerk#000000779     93382.65     4
+1998-07-27 1432258    O      1-URGENT        Clerk#000000590     77070.43     4
+15 orders
+(1 Query page(s), 44.4 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q3: all line items of order 5512869
+
+```txt
+Query  index OrderIndex  orderkey=5512869
+  -> pk=CUST#121  sk=ORDER#1994-06-26#0005512869
+GetItem  pk=CUST#121  sk=ORDER#1994-06-26#0005512869
+orderdate  orderkey   status priority        clerk             totalprice lines
+1994-06-26 5512869    F      4-NOT SPECIFIED Clerk#000000408    133146.02     7
+line partkey  suppkey   qty     extprice  disc   tax rf ls shipdate   commitdate receipt    shipinstruct      mode   
+1    158243   5789        1      1301.24  0.02  0.04 A  F  1994-07-23 1994-08-08 1994-07-26 DELIVER IN PERSON SHIP   
+2    173959   3960        1      2032.95  0.02  0.03 A  F  1994-07-05 1994-08-02 1994-07-06 DELIVER IN PERSON FOB    
+3    123950   8975       40     78958.00  0.07  0.04 R  F  1994-09-01 1994-08-26 1994-09-27 TAKE BACK RETURN  REG AIR
+4    26304    6305        1      1230.30  0.05  0.06 A  F  1994-10-02 1994-09-23 1994-10-06 TAKE BACK RETURN  SHIP   
+5    83046    5555       31     31900.24  0.09  0.00 R  F  1994-09-10 1994-09-12 1994-09-14 TAKE BACK RETURN  FOB    
+6    149742   9743        4      7166.96  0.00  0.03 R  F  1994-08-06 1994-09-10 1994-08-26 COLLECT COD       AIR    
+7    100340   5361       12     16084.08  0.04  0.02 R  F  1994-07-20 1994-09-09 1994-08-18 DELIVER IN PERSON REG AIR
+7 line items
+(1 index Query page(s) + 1 GetItem, 11.4 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q4: order history of customer 121 (profile + each order with its line items)
+
+```txt
+GetItem  pk=CUST#121  sk=PROFILE
+Query    pk=CUST#121  sk begins_with ORDER#
+Customer#000000121  (custkey 121, BUILDING, nation 17, phone 27-411-990-2959, balance 6428.32)
+
+ORDER 3177383  1992-03-31  status F  5-LOW  clerk Clerk#000000789  total 188986.83
+    line 1  part 30291   supp 292   qty  34  ext   41523.86  disc 0.10  tax 0.00  RF  ship 1992-07-06 REG AIR
+    line 2  part 89411   supp 1920  qty  30  ext   42012.30  disc 0.03  tax 0.00  RF  ship 1992-07-07 FOB
+    line 3  part 128698  supp 3723  qty  44  ext   75974.36  disc 0.04  tax 0.02  AF  ship 1992-06-09 MAIL
+    line 4  part 14288   supp 6790  qty  31  ext   37270.68  disc 0.05  tax 0.03  AF  ship 1992-07-15 FOB
+
+ORDER 3279495  1992-10-21  status F  1-URGENT  clerk Clerk#000000078  total 102928.39
+    line 1  part 4074    supp 6575  qty  22  ext   21517.54  disc 0.09  tax 0.08  RF  ship 1992-12-29 TRUCK
+    line 2  part 55553   supp 5554  qty  11  ext   16594.05  disc 0.06  tax 0.00  RF  ship 1992-12-29 RAIL
+    line 3  part 62881   supp 5388  qty   4  ext    7375.52  disc 0.07  tax 0.08  RF  ship 1993-01-07 MAIL
+    line 4  part 35764   supp 771   qty  22  ext   37394.72  disc 0.06  tax 0.08  AF  ship 1992-11-25 TRUCK
+    line 5  part 85126   supp 5127  qty  19  ext   21111.28  disc 0.07  tax 0.06  AF  ship 1993-01-04 SHIP
+
+ORDER 3568994  1993-06-24  status F  5-LOW  clerk Clerk#000000294  total 210567.55
+    line 1  part 175816  supp 5817  qty  49  ext   92698.69  disc 0.04  tax 0.02  AF  ship 1993-08-31 SHIP
+    line 2  part 123613  supp 1150  qty   6  ext    9819.66  disc 0.04  tax 0.07  AF  ship 1993-06-27 MAIL
+    line 3  part 161673  supp 4190  qty  34  ext   58978.78  disc 0.02  tax 0.06  RF  ship 1993-10-15 AIR
+    line 4  part 36749   supp 1756  qty  31  ext   52257.94  disc 0.10  tax 0.03  AF  ship 1993-09-03 FOB
+
+ORDER 2970276  1993-10-16  status F  1-URGENT  clerk Clerk#000000270  total 110090.35
+    line 1  part 42471   supp 2472  qty  47  ext   66433.09  disc 0.09  tax 0.07  RF  ship 1994-01-19 MAIL
+    line 2  part 196580  supp 1619  qty  28  ext   46944.24  disc 0.07  tax 0.04  AF  ship 1993-10-27 MAIL
+
+ORDER 2383682  1993-12-26  status F  3-MEDIUM  clerk Clerk#000000533  total 3087.81
+    line 1  part 195405  supp 5406  qty   2  ext    3000.80  disc 0.02  tax 0.05  AF  ship 1994-02-09 MAIL
+
+ORDER 3960641  1994-01-24  status F  5-LOW  clerk Clerk#000000376  total 77312.55
+    line 1  part 162920  supp 7953  qty   2  ext    3965.84  disc 0.05  tax 0.06  AF  ship 1994-04-10 FOB
+    line 2  part 188887  supp 1406  qty  38  ext   75083.44  disc 0.07  tax 0.05  AF  ship 1994-04-18 SHIP
+
+ORDER 2174404  1994-04-09  status F  3-MEDIUM  clerk Clerk#000000397  total 55650.77
+    line 1  part 146032  supp 3575  qty  13  ext   14014.39  disc 0.10  tax 0.01  AF  ship 1994-07-28 TRUCK
+    line 2  part 148863  supp 8864  qty  15  ext   28677.90  disc 0.08  tax 0.03  AF  ship 1994-04-12 FOB
+    line 3  part 138205  supp 719   qty  13  ext   16161.60  disc 0.09  tax 0.07  RF  ship 1994-07-21 AIR
+
+ORDER 5512869  1994-06-26  status F  4-NOT SPECIFIED  clerk Clerk#000000408  total 133146.02
+    line 1  part 158243  supp 5789  qty   1  ext    1301.24  disc 0.02  tax 0.04  AF  ship 1994-07-23 SHIP
+    line 2  part 173959  supp 3960  qty   1  ext    2032.95  disc 0.02  tax 0.03  AF  ship 1994-07-05 FOB
+    line 3  part 123950  supp 8975  qty  40  ext   78958.00  disc 0.07  tax 0.04  RF  ship 1994-09-01 REG AIR
+    line 4  part 26304   supp 6305  qty   1  ext    1230.30  disc 0.05  tax 0.06  AF  ship 1994-10-02 SHIP
+    line 5  part 83046   supp 5555  qty  31  ext   31900.24  disc 0.09  tax 0.00  RF  ship 1994-09-10 FOB
+    line 6  part 149742  supp 9743  qty   4  ext    7166.96  disc 0.00  tax 0.03  RF  ship 1994-08-06 AIR
+    line 7  part 100340  supp 5361  qty  12  ext   16084.08  disc 0.04  tax 0.02  RF  ship 1994-07-20 REG AIR
+
+ORDER 5299460  1994-10-01  status F  2-HIGH  clerk Clerk#000000570  total 147099.69
+    line 1  part 120498  supp 3011  qty  17  ext   25814.33  disc 0.02  tax 0.06  AF  ship 1994-10-25 AIR
+    line 2  part 4077    supp 9078  qty   3  ext    2943.21  disc 0.07  tax 0.01  AF  ship 1994-11-26 RAIL
+    line 3  part 114001  supp 1535  qty  49  ext   49735.00  disc 0.03  tax 0.02  AF  ship 1994-11-03 FOB
+    line 4  part 13391   supp 8394  qty  22  ext   28696.58  disc 0.03  tax 0.03  RF  ship 1994-10-02 TRUCK
+    line 5  part 47432   supp 9937  qty  30  ext   41382.90  disc 0.07  tax 0.03  AF  ship 1994-11-30 TRUCK
+
+ORDER 202628  1994-10-10  status F  4-NOT SPECIFIED  clerk Clerk#000000179  total 85006.64
+    line 1  part 7049    supp 7050  qty  22  ext   21032.88  disc 0.07  tax 0.05  AF  ship 1994-10-13 SHIP
+    line 2  part 59993   supp 5004  qty  16  ext   31247.84  disc 0.00  tax 0.04  RF  ship 1994-11-05 MAIL
+    line 3  part 92560   supp 5070  qty  20  ext   31051.20  disc 0.01  tax 0.04  RF  ship 1994-11-29 FOB
+
+ORDER 3797444  1995-08-06  status O  4-NOT SPECIFIED  clerk Clerk#000000779  total 210230.11
+    line 1  part 180118  supp 7673  qty   2  ext    2396.22  disc 0.05  tax 0.03  NO  ship 1995-10-06 FOB
+    line 2  part 29996   supp 9997  qty  31  ext   59705.69  disc 0.06  tax 0.07  NO  ship 1995-08-11 SHIP
+    line 3  part 130760  supp 761   qty  49  ext   87747.24  disc 0.05  tax 0.05  NO  ship 1995-10-09 SHIP
+    line 4  part 74888   supp 4889  qty   4  ext    7451.52  disc 0.03  tax 0.01  NO  ship 1995-11-01 MAIL
+    line 5  part 29678   supp 9679  qty  33  ext   53053.11  disc 0.03  tax 0.03  NO  ship 1995-08-10 RAIL
+
+ORDER 4240038  1996-06-19  status O  3-MEDIUM  clerk Clerk#000000055  total 124670.76
+    line 1  part 140367  supp 2882  qty  34  ext   47850.24  disc 0.02  tax 0.03  NO  ship 1996-06-21 TRUCK
+    line 2  part 131694  supp 1695  qty  44  ext   75930.36  disc 0.06  tax 0.07  NO  ship 1996-10-05 REG AIR
+
+ORDER 464128  1997-09-02  status O  1-URGENT  clerk Clerk#000000604  total 215871.48
+    line 1  part 130459  supp 5486  qty   3  ext    4468.35  disc 0.08  tax 0.06  NO  ship 1997-09-17 RAIL
+    line 2  part 9677    supp 7178  qty  23  ext   36493.41  disc 0.00  tax 0.02  NO  ship 1997-10-16 SHIP
+    line 3  part 36268   supp 3778  qty  35  ext   42149.10  disc 0.01  tax 0.06  NO  ship 1997-09-13 MAIL
+    line 4  part 141244  supp 6273  qty  47  ext   60406.28  disc 0.05  tax 0.04  NO  ship 1997-12-29 SHIP
+    line 5  part 84867   supp 9884  qty  28  ext   51852.08  disc 0.03  tax 0.02  NO  ship 1997-10-02 SHIP
+    line 6  part 149322  supp 1837  qty  14  ext   19198.48  disc 0.08  tax 0.08  NO  ship 1997-10-20 AIR
+
+ORDER 5783393  1997-12-31  status O  4-NOT SPECIFIED  clerk Clerk#000000779  total 93382.65
+    line 1  part 72936   supp 7951  qty  30  ext   57267.90  disc 0.08  tax 0.05  NO  ship 1998-03-04 REG AIR
+    line 2  part 22244   supp 7249  qty  12  ext   13994.88  disc 0.02  tax 0.02  NO  ship 1998-03-01 TRUCK
+    line 3  part 51371   supp 8887  qty  14  ext   18513.18  disc 0.08  tax 0.08  NO  ship 1998-03-15 SHIP
+    line 4  part 177906  supp 7907  qty   3  ext    5951.70  disc 0.10  tax 0.06  NO  ship 1998-02-06 SHIP
+
+ORDER 1432258  1998-07-27  status O  1-URGENT  clerk Clerk#000000590  total 77070.43
+    line 1  part 193242  supp 8281  qty  11  ext   14687.64  disc 0.10  tax 0.06  NO  ship 1998-11-06 SHIP
+    line 2  part 5267    supp 268   qty  26  ext   30478.76  disc 0.00  tax 0.08  NO  ship 1998-11-18 TRUCK
+    line 3  part 120825  supp 826   qty   5  ext    9229.10  disc 0.05  tax 0.02  NO  ship 1998-11-19 FOB
+    line 4  part 91351   supp 3861  qty  16  ext   21477.60  disc 0.06  tax 0.05  NO  ship 1998-08-06 REG AIR
+
+15 orders, 57 line items, lifetime order value 1835102.03
+(1 GetItem + 1 Query page(s), 18.3 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q5: items ordered by customer 121 in 1994
+
+```txt
+Query  pk=CUST#121  sk begins_with ORDER#1994
+orderdate  orderkey   line partkey  suppkey   qty     extprice
+1994-01-24 3960641    1    162920   7953        2      3965.84
+1994-01-24 3960641    2    188887   1406       38     75083.44
+1994-04-09 2174404    1    146032   3575       13     14014.39
+1994-04-09 2174404    2    148863   8864       15     28677.90
+1994-04-09 2174404    3    138205   719        13     16161.60
+1994-06-26 5512869    1    158243   5789        1      1301.24
+1994-06-26 5512869    2    173959   3960        1      2032.95
+1994-06-26 5512869    3    123950   8975       40     78958.00
+1994-06-26 5512869    4    26304    6305        1      1230.30
+1994-06-26 5512869    5    83046    5555       31     31900.24
+1994-06-26 5512869    6    149742   9743        4      7166.96
+1994-06-26 5512869    7    100340   5361       12     16084.08
+1994-10-01 5299460    1    120498   3011       17     25814.33
+1994-10-01 5299460    2    4077     9078        3      2943.21
+1994-10-01 5299460    3    114001   1535       49     49735.00
+1994-10-01 5299460    4    13391    8394       22     28696.58
+1994-10-01 5299460    5    47432    9937       30     41382.90
+1994-10-10 202628     1    7049     7050       22     21032.88
+1994-10-10 202628     2    59993    5004       16     31247.84
+1994-10-10 202628     3    92560    5070       20     31051.20
+5 orders in 1994, 20 line items, 20 distinct parts: [4077, 7049, 13391, 26304, 47432, 59993, 83046, 92560, 100340, 114001, 120498, 123950, 138205, 146032, 148863, 149742, 158243, 162920, 173959, 188887]
+(1 Query page(s), 11.7 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q6: items customer 121 ordered in 1993 but not in 1994
+
+```txt
+Query  pk=CUST#121  sk begins_with ORDER#1993
+Query  pk=CUST#121  sk begins_with ORDER#1994
+parts ordered in 1993 : 7 distinct [36749, 42471, 123613, 161673, 175816, 195405, 196580]
+parts ordered in 1994 : 20 distinct [4077, 7049, 13391, 26304, 47432, 59993, 83046, 92560, 100340, 114001, 120498, 123950, 138205, 146032, 148863, 149742, 158243, 162920, 173959, 188887]
+in 1993 but not in 1994: 7 parts
+partkey  orderdate  orderkey   line   qty     extprice
+175816   1993-06-24 3568994    1       49     92698.69
+123613   1993-06-24 3568994    2        6      9819.66
+161673   1993-06-24 3568994    3       34     58978.78
+36749    1993-06-24 3568994    4       31     52257.94
+42471    1993-10-16 2970276    1       47     66433.09
+196580   1993-10-16 2970276    2       28     46944.24
+195405   1993-12-26 2383682    1        2      3000.80
+(2 Query page(s), 16.1 ms)
+```
+</toggle>
+
+<toggle heading="h3">
+Q7: total value of the orders of customer 121 in 1994
+
+```txt
+Query  pk=CUST#121  sk begins_with ORDER#1994
+orderdate  orderkey   status   totalprice
+1994-01-24 3960641    F          77312.55
+1994-04-09 2174404    F          55650.77
+1994-06-26 5512869    F         133146.02
+1994-10-01 5299460    F         147099.69
+1994-10-10 202628     F          85006.64
+5 orders in 1994, total value 498215.67
+cross-check from line items, sum of extendedprice*(1-discount)*(1+tax) = 498215.88
+(1 Query page(s), 13.3 ms)
+```
+</toggle>

@@ -1,0 +1,9 @@
+
+======== describe-table TPCH ========
+status               : ACTIVE
+billing              : PAY_PER_REQUEST
+key schema           : pk (HASH), sk (RANGE)
+attribute definitions: orderkey N  sk S  pk S
+GSI OrderIndex        : orderkey (HASH), projection KEYS_ONLY, status ACTIVE
+item count           : 1,650,000
+table size           : 1,881,362,746 bytes (1794.2 MiB)

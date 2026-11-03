@@ -1,0 +1,11 @@
+pmj/bdp/dynamo/lab10/LineItem.class
+pmj/bdp/dynamo/lab10/Order.class
+pmj/bdp/dynamo/lab10/Dynamo.class
+pmj/bdp/dynamo/lab10/Lab10.class
+pmj/bdp/dynamo/lab10/Queries.class
+pmj/bdp/dynamo/lab10/TpchLoader$BatchWriter.class
+pmj/bdp/dynamo/lab10/TpchLoader.class
+pmj/bdp/dynamo/lab10/Customer.class
+pmj/bdp/dynamo/lab10/Schema.class
+pmj/bdp/dynamo/lab10/Keys.class
+pmj/bdp/dynamo/lab10/TpchLoader$Report.class

@@ -33,3 +33,7 @@ lab8/tpch-kit/
 # Lab 9 corders.json dump and RocksDB stores
 lab9/data/
 lab9/db/
+
+# Lab 10 DynamoDB Local distribution, its SQLite data files and the TPC-H extracts
+lab10/dynamodb_local/
+lab10/db/
